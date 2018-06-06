@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chewa_app',
+    'bootstrap3',
+    
 ]
 
 MIDDLEWARE = [
