@@ -1,6 +1,6 @@
 from django.db import models
 import datetime as dt
-from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -11,7 +11,7 @@ class Profile (models.Model):
     def __str__(self):
         return self.name
 
-class language (models.Model):
+class Language (models.Model):
     name = models.CharField(max_length =30)
 
     def __str__(self):
@@ -19,7 +19,7 @@ class language (models.Model):
 
 
 class Content (models.Model):
-    language = models.CharField(max_length=60)
+    language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     category = models.CharField(max_length=60)
 
     def __str__(self):
@@ -42,14 +42,13 @@ class Content (models.Model):
 
 class Level (models.Model):
     Easy = models.CharField(max_length=30)
-    Hard = models.ForeignKey(User)
-
+    Hard = models.CharField(max_length=30)
 
 class Lessons (models.Model):
     question = models.CharField(max_length=50)
     answer = models.CharField(max_length=50)
-    language = models.IntegerField()
-    level = models.IntegerField()
+    language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
+    level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to = 'chewa_img/',null=True)
 
 
