@@ -12,6 +12,9 @@ class LessonDetails (forms.ModelForm):
     class Meta:
         model = Lessons
         fields = ['question', 'answer', 'image', ]
+        widgets = {
+            'Language': forms.CheckboxSelectMultiple(),
+        }
         
 
 
