@@ -33,7 +33,7 @@ class Lessons(models.Model):
     Answer=models.CharField(max_length=500)
     Language=models.ForeignKey(Language,on_delete=models.CASCADE )
     category=models.ForeignKey(Content,on_delete=models.CASCADE)
-    Level=models.ForeignKey(Easy ,on_delete=models.CASCADE)
+    Easy=models.ForeignKey(Easy ,on_delete=models.CASCADE)
     
     def __str__(self):
         return self.Question

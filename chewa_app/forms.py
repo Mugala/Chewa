@@ -4,7 +4,7 @@ from .models import Language, Content, Profile, Easy, Lessons
 class LessonForm(forms.ModelForm):
     class Meta:
         model=Lessons
-        fields=('Question', 'Answer', 'Language', 'category','Level')
+        fields=('Question', 'Answer', 'Language', 'category','Easy')
 
 class LevelForm(forms.ModelForm):
     class Meta:
