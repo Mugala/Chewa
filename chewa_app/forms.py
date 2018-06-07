@@ -13,3 +13,18 @@ class LevelForm(forms.ModelForm):
         widgets = {
             'easy_or_hard': forms.RadioSelect
         }
+
+class LanguageForm(forms.ModelForm):
+    class Meta:
+        model=Language
+        fields=('name',)
+
+class ContentForm(forms.ModelForm):
+    class Meta:
+        model=Content
+        fields=('language', "Category")
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model=Profile
+        fields=('name','email')
