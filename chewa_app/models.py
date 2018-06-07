@@ -9,7 +9,7 @@ class Profile(models.Model):
         
 BOOL_CHOICES = ((True, 'Easy'), (False, 'Hard'))
 class Easy(models.Model):
-    easy_or_hard = models.CharField(max_length=100,choices=BOOL_CHOICES)
+    easy_or_hard = models.BooleanField(max_length=100,choices=BOOL_CHOICES)
 
     def __str__(self):
         return str(self.easy_or_hard)
