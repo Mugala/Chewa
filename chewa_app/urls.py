@@ -13,6 +13,8 @@ urlpatterns = [
     path('lesson', views.lesson, name='lesson'),
     path('api/lessons', views.LessonList.as_view()),
     path('api-token-auth/', obtain_auth_token),
+    path('api/lesson/lesson-id/<int:pk>/',
+        views.LessonDescription.as_view())
 ]
 
 if settings.DEBUG:

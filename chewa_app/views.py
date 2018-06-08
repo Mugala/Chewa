@@ -84,3 +84,25 @@ class LessonList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         
 class LessonDescription(APIView):
+    permission_classes=(IsAdminOrReadOnly,)
+    def get_lesson(self, pk):
+        try:
+            return Lesson.objects.get(pk=pk)
+        except Lesson.DoesNotExist:
+            return Http404
+    def get(self, request, pk, format=None):
+        lesson=self.get_lesson(pk)
+        serializers= LessonSerializer(lesson)
+        return Response(serializers.data)
+    def put(self, request, pk, format=None):
+        lesson=self.get_lesson(pk)
+        serializers=LessonSerializer(lesson, request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    def delete(self, request, pk, format=None):
+        lesson=self.get_lesson(pk)
+        lesson.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
