@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import Language,Lessons,Level,Content,Profile
+from .models import Language,Lesson,Level,Content,Profile,Score
 from .forms import ProfileDetails,LanguageDetails,LessonDetails
 
 # Create your views here.
@@ -18,7 +18,7 @@ def profile(request):
             Profile.user = current_user
             Profile.save()
 
-            return redirect("home")
+            return redirect("home_page")
     else:
         form = ProfileDetails()
     
@@ -33,7 +33,7 @@ def language (request):
             language.user = current_user
             language.save()
 
-            return redirect("home")
+            return redirect("home_page")
     else:
         language_form = LanguageDetails()
     
@@ -48,7 +48,7 @@ def lesson (request):
             Lesson.user = current_user
             Lesson.save()
 
-            return redirect("home")
+            return redirect("home_page")
     else:
         lesson_form = LessonDetails()
     
