@@ -49,7 +49,7 @@ class Content (models.Model):
     category = models.CharField(max_length=60)
 
     def __str__(self):
-        return self.language
+        return self.language.name
 
     def save_Content(self):
         self.save()
