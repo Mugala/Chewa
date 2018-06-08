@@ -53,3 +53,14 @@ def lesson (request):
         lesson_form = LessonDetails()
     
     return render(request, 'dashboard/Lesson_details.html', {"lesson_form":lesson_form})
+
+def user_score(request, id):
+    current_user=request.user
+    photo=get_object_or_404(Photos, id=id)
+    if current_user in photo.likes.all():
+        photo.likes.add(current_user)
+        photo.likes.remove(current_user)
+    else:
+        photo.likes.add(current_user)
+       
+    return redirect('/')
