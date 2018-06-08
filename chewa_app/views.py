@@ -1,7 +1,11 @@
 from django.shortcuts import render,redirect
 from .models import Language, Content, Profile, Easy, Lessons
 from .forms import LessonForm, LanguageForm, ContentForm, ProfileForm
-# Create your views here.
+from rest_framework.response import Response
+from rest_framework.views import APIView, status
+from .serializer import LessonsSerializer
+from .permissions import IsAdminOrReadOnly
+
 
 def home_page(request):
 
@@ -20,6 +24,21 @@ def create_lesson(request):
     else:
         form=LessonForm()
     return render(request, 'forms/lesson.html', {"title":title, "form":form})
+
+class LessonList(APIView):
+    def get(self, request, format=None):
+        all_lessons=Lessons.objects.all()
+        serializers=LessonsSerializer(all_lessons, many=True)
+        return Response(serializers.data)
+    def post(self, request, format=None):
+        serializers=LessonsSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        permission_classes = (IsAdminOrReadOnly,)
+       
 
 def add_language(request):
     title="add languaged"
