@@ -2,8 +2,12 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Language,Lesson,Level,Content,Profile,Score
 from .forms import ProfileDetails,LanguageDetails,LessonDetails
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import LessonSerializer
+from rest_framework import status
+from .permissions import IsAdminOrReadOnly
 
-# Create your views here.
 
 def home_page(request):
 
@@ -64,3 +68,19 @@ def user_score(request, id):
         photo.likes.add(current_user)
        
     return redirect('/')
+
+class LessonList(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+    def get(self, request, format=None):
+        all_lessons = Lesson.objects.all()
+        serializers= LessonSerializer(all_lessons, many=True)
+        return Response(serializers.data) 
+
+    def post(self, request, format=None):
+        serializers= LessonSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+class LessonDescription(APIView):
