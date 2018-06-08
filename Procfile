@@ -1,1 +1,1 @@
-web: gunicorn Chewa.wsgi --log-file -
+web: gunicorn Chewa.wsgi
