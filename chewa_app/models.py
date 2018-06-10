@@ -10,16 +10,16 @@ class Profile (models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
     score = models.ManyToManyField(User, blank=True)
-    
+
     def __str__(self):
         return self.name
-    
+
     def save_Profile(self):
         self.save()
 
     def delete_Profile(self):
         self.delete()
-    
+
     @classmethod
     def profile (cls):
         profile_details = cls.objects.all()
@@ -36,8 +36,8 @@ class Language (models.Model):
         self.save()
 
     def delete_Language(self):
-        self.delete()   
-    
+        self.delete()
+
     @classmethod
     def language (cls):
         language_details = cls.objects.all()
@@ -56,7 +56,7 @@ class Content (models.Model):
 
     def delete_Content(self):
         self.delete()
-        
+
 
     @classmethod
     def content_details(cls):
@@ -87,6 +87,8 @@ class Lesson (models.Model):
     level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to = 'chewa_img/',null=True)
 
+    def __str__(self):
+        return self.question
 
     def save_Lesson(self):
         self.save()
@@ -110,6 +112,3 @@ class Score (models.Model):
     def get_likes(cls):
         score=cls.objects.all()
         return score
-
-
-

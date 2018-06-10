@@ -13,6 +13,35 @@ def home_page(request):
 
     return render(request, 'home.html')
 
+def swahili_page(request):
+
+    return render(request, 'languages/swahili.html')
+
+def swahili_beginning(request):
+
+    return render(request, 'beginner/swahili.html')
+
+
+def luo_page(request):
+
+    return render(request, 'languages/luo.html')
+
+def luo_beginning(request):
+
+    return render(request, 'beginner/luo.html')
+
+def kikuyu_page(request):
+
+    return render(request, 'languages/kikuyu.html')
+
+def kikuyu_beginning(request):
+
+    return render(request, 'beginner/kikuyu.html')
+
+def KSL_page(request):
+
+    return render(request, 'languages/KSL.html')
+
 def profile(request):
     current_user = request.user
     if request.method == 'POST':
@@ -25,7 +54,7 @@ def profile(request):
             return redirect("home_page")
     else:
         form = ProfileDetails()
-    
+
     return render(request, 'dashboard/profile.html', {"form":form})
 
 def language (request):
@@ -40,7 +69,7 @@ def language (request):
             return redirect("home_page")
     else:
         language_form = LanguageDetails()
-    
+
     return render(request, 'dashboard/Language_details.html', {"language_form":language_form})
 
 def lesson (request):
@@ -55,7 +84,7 @@ def lesson (request):
             return redirect("home_page")
     else:
         lesson_form = LessonDetails()
-    
+
     return render(request, 'dashboard/Lesson_details.html', {"lesson_form":lesson_form})
 
 def user_score(request, id):
@@ -66,7 +95,7 @@ def user_score(request, id):
         photo.likes.remove(current_user)
     else:
         photo.likes.add(current_user)
-       
+
     return redirect('/')
 
 class LessonList(APIView):
@@ -74,7 +103,7 @@ class LessonList(APIView):
     def get(self, request, format=None):
         all_lessons = Lesson.objects.all()
         serializers= LessonSerializer(all_lessons, many=True)
-        return Response(serializers.data) 
+        return Response(serializers.data)
 
     def post(self, request, format=None):
         serializers= LessonSerializer(data=request.data)
@@ -82,7 +111,7 @@ class LessonList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
 class LessonDescription(APIView):
     permission_classes=(IsAdminOrReadOnly,)
     def get_lesson(self, pk):
