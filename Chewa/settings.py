@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'chewa_app',
     'bootstrap3',
-    
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Chewa.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -81,8 +87,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'chewa',
-        'USER': 'levi',
-        'PASSWORD': 'eyeshadow',
+        'USER': 'kiptim',
+        'PASSWORD': 'jerotich',
     }
 }
 
