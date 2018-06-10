@@ -86,6 +86,7 @@ class Lesson (models.Model):
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to = 'chewa_img/',null=True)
+    score = models.ManyToManyField(User, related_name='answer_score', blank=True)
 
 
     def save_Lesson(self):
@@ -110,6 +111,5 @@ class Score (models.Model):
     def get_likes(cls):
         score=cls.objects.all()
         return score
-
 
 
