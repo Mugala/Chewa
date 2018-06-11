@@ -49,7 +49,7 @@ class Content (models.Model):
     category = models.CharField(max_length=60)
 
     def __str__(self):
-        return self.language.name
+        return self.category
 
     def save_Content(self):
         self.save()
@@ -83,6 +83,7 @@ class Level (models.Model):
 class Lesson (models.Model):
     question = models.CharField(max_length=50)
     answer = models.CharField(max_length=50)
+    content=models.ForeignKey(Content,on_delete=models.CASCADE)
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to = 'chewa_img/',null=True)
@@ -100,6 +101,12 @@ class Lesson (models.Model):
     def lesson_details(cls):
         lesson_details = cls.objects.all()
         return lesson_details
+
+    @classmethod
+    def single_lesson(cls,single_category):
+        single = cls.objects.filter(content__category__icontains=single_category)
+        print(single)
+        return single
 
 class Score (models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)

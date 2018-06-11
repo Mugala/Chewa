@@ -14,10 +14,16 @@ urlpatterns = [
     path('ksl', views.KSL_page, name='ksl'),
     path('luo', views.luo_page, name='luo'),
     path('luo-begin', views.luo_beginning, name='luo-begin'),
+
+    path('luo-begin-test/', views.luo_test1, name='luo-begin-test'),
+
     path('kikuyu', views.kikuyu_page, name='kikuyu'),
     path('ki-begin', views.kikuyu_beginning, name='ki-begin'),
+    path('ki-begin-test', views.kikuyu_test1, name='ki-begin-test'),
     path('kiswahili', views.swahili_page, name='swahili'),
     path('swa-begin', views.swahili_beginning, name='swa-begin'),
+    path('swa-begin-test', views.swahili_test1, name='swa-begin-test'),
+    path('search', views.luo_test1, name='luo_test1'),
     path('api/lessons', views.LessonList.as_view()),
     path('api-token-auth/', obtain_auth_token),
     path('api/lesson/lesson-id/<int:pk>/',

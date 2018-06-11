@@ -21,6 +21,10 @@ def swahili_beginning(request):
 
     return render(request, 'beginner/swahili.html')
 
+def swahili_test1(request):
+
+    return render(request, 'test1/swahili.html')
+
 
 def luo_page(request):
 
@@ -30,6 +34,21 @@ def luo_beginning(request):
 
     return render(request, 'beginner/luo.html')
 
+def luo_test1(request):
+    question= Lesson.objects.all()
+    single_lesson = Lesson.objects.filter(language_id=3).all()
+    print(single_lesson)
+
+    if request.method == 'POST':
+        form= LessonDetails(request.POST, request.FILES)
+        if form.is_valid():
+            single_lesson = form.save(commit = False)
+            single_lesson.save()
+    else:
+        form = LessonDetails()
+
+    return render(request, 'test1/luo.html',{"question":question,"single_lesson":single_lesson,"form":form})
+
 def kikuyu_page(request):
 
     return render(request, 'languages/kikuyu.html')
@@ -37,6 +56,10 @@ def kikuyu_page(request):
 def kikuyu_beginning(request):
 
     return render(request, 'beginner/kikuyu.html')
+
+def kikuyu_test1(request):
+
+    return render(request, 'test1/kikuyu.html')
 
 def KSL_page(request):
 
