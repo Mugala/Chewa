@@ -5,16 +5,29 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-xs-6 col-xs-offset-3">
-        <h2>Login</h2>
+    <div class="col-xs-6">
+        <h2 class="text-center">Login</h2>
+        <hr>
         <form method="post">
           {% csrf_token %}
           {% bootstrap_form form %}
-          <button type="submit">Login</button>
+          <button class='btn btn-danger' type="submit">Login</button>
         </form>
         <br>
-        <p><strong>-- OR --</strong></p>
-        <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google Account</a><br>
+        <p>No account? Sign up <a href="">here</a>
+        </p>  
+    </div>
+    <div class="col-xs-6 text-center">
+      <h2>Social Login</h2>
+      <hr>
+      <div id="google"class='text-center'>
+         
+        <form action="{% url 'social:begin' 'google-oauth2' %}">
+            {% csrf_token %}
+            <img src="https://fthmb.tqn.com/IH_l1QnIcFddCFuviMJ7UuRJfko=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/google-plus-57d9e4d53df78c9cceedc5e1.png" alt="" style="width:7%; display:inline-block" class="img-responsive" >
+          <input class="btn btn-danger" style="display:inline-block;"type="submit" value="Login with Google Account" method='post'>
+        </form>
+      </div>
     </div>
   </div>
 </div>
