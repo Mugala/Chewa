@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-md-6">
         <h2 class="text-center">Login</h2>
         <hr>
         <form method="post">
@@ -14,12 +14,13 @@
           <button class='btn btn-danger' type="submit">Login</button>
         </form>
         <br>
-        <p>No account? Sign up <a href="">here</a>
+        <p>No account? Sign up <a href="{% url 'sign_up' %}">here</a>
         </p>  
     </div>
-    <div class="col-xs-6 text-center">
+    <div class="col-xs-12 col-md-6 text-center">
       <h2>Social Login</h2>
       <hr>
+      <br>
       <div id="google"class='text-center'>
          
         <form action="{% url 'social:begin' 'google-oauth2' %}">

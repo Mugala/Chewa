@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/lesson/lesson-id/<int:pk>/',views.LessonDescription.as_view()),
     path('settings/', views.settings, name='settings'),
     path('settings/password/', views.password, name='password'),
+    path('signup/', views.sign_up, name='sign_up'),
 ]
 
 if settings.DEBUG:

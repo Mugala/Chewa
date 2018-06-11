@@ -8,10 +8,11 @@ from .serializer import LessonSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm, UserCreationForm
+from django.contrib.auth import update_session_auth_hash, login, authenticate
 from django.contrib import messages
 from social_django.models import UserSocialAuth
+
 
 
 
@@ -138,6 +139,7 @@ class LessonDescription(APIView):
 
 @login_required
 def settings(request):
+    title="Chewa | Settings"
     user = request.user
     try:
         google_login = user.social_auth.get(provider='google-oauth2')
@@ -159,6 +161,7 @@ def settings(request):
 
 @login_required
 def password(request):
+    title="Chewa | Password"
     if request.user.has_usable_password():
         PasswordForm = PasswordChangeForm
     else:
@@ -176,4 +179,19 @@ def password(request):
     else:
         form = PasswordForm(request.user)
     return render(request, 'registration/password.html', {'form': form})
+
+def sign_up(request):
+    title="Chewa | Sign Up"
+    if request.method=='POST':
+        form =UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username=form.cleaned_data.get('username')
+            raw_password=form.cleaned_data.get('password1')
+            user=authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home_page')
+    else:form=UserCreationForm()
+    return render(request, 'registration/sign_up.html', {"form":form, "title":title})
+            
 
