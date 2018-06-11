@@ -10,10 +10,11 @@
         <h5>You are logged in as {{user.username}}</h5>
         {%endif %}
       <h2>Social Authentication</h2>
+      
       <hr>
         <h3>Google</h3>
         {% if google_login %}
-          <p>Connected as <a href="https://google.com/{{ google_login.extra_data.login }}/" target="_blank">{{ google_login.extra_data.login }}</a></p>
+          <p>Connected as <a href="https://accounts.google.com/{{ google_login.extra_data.login }}/" target="_blank">{{ google_login.extra_data.login }}llllllll</a></p>
           {% if can_disconnect %}
             <form method="post" action="{% url 'social:disconnect' 'google-oauth2' %}">
               {% csrf_token %}

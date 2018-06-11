@@ -9,7 +9,7 @@ from rest_framework import status
 from .permissions import IsAdminOrReadOnly
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm, UserCreationForm
-from django.contrib.auth import update_session_auth_hash, login, authenticate
+from django.contrib.auth import update_session_auth_hash, login, authenticate, logout
 from django.contrib import messages
 from social_django.models import UserSocialAuth
 
@@ -141,8 +141,10 @@ class LessonDescription(APIView):
 def settings(request):
     title="Chewa | Settings"
     user = request.user
+    print(user)
     try:
         google_login = user.social_auth.get(provider='google-oauth2')
+        
     except UserSocialAuth.DoesNotExist:
         google_login = None
 
