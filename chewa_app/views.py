@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Language,Lesson,Level,Content,Profile,Score
 from .forms import ProfileDetails,LanguageDetails,LessonDetails
@@ -7,6 +7,13 @@ from rest_framework.views import APIView
 from .serializer import LessonSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm, UserCreationForm
+from django.contrib.auth import update_session_auth_hash, login, authenticate, logout
+from django.contrib import messages
+from social_django.models import UserSocialAuth
+
+
 
 
 def home_page(request):
@@ -112,7 +119,30 @@ def lesson (request):
 
 def user_score(request, id):
     current_user=request.user
-    photo=get_object_or_404(Photos, id=id)
+    current_user=request.user
+    answers = get_object_or_404(Lesson, id=id)
+
+    questions = {
+        "How tall is the Eiffel Tower?":['a. 350m', 'b. 342m', 'c. 324m', 'd. 1000ft','a'],
+        "How loud is a sonic boom?":['a. 160dB', 'b. 175dB', 'c. 157dB', 'd. 213dB', 'd']
+    } 
+
+    score = 0  
+    for question_number,question in enumerate(questions):
+        print ("Question",question_number+1) 
+        print (question)
+        for options in questions[question][:-1]:
+            print (options)
+        user_choice = input("Make your choice : ")
+        if user_choice == questions[question][-1]:
+            print ("Correct!")
+            score += 1 
+        else: 
+            print ("Wrong!")
+
+    print(score) 
+       
+    return redirect('/')
     if current_user in photo.likes.all():
         photo.likes.add(current_user)
         photo.likes.remove(current_user)
@@ -158,3 +188,64 @@ class LessonDescription(APIView):
         lesson=self.get_lesson(pk)
         lesson.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@login_required
+def settings(request):
+    title="Chewa | Settings"
+    user = request.user
+    print(user)
+    try:
+        google_login = user.social_auth.get(provider='google-oauth2')
+        
+    except UserSocialAuth.DoesNotExist:
+        google_login = None
+
+    try:
+        facebook_login = user.social_auth.get(provider='facebook')
+    except UserSocialAuth.DoesNotExist:
+        facebook_login = None
+
+    can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
+
+    return render(request, 'registration/settings.html', {
+        'google_login': google_login,
+        'facebook_login': facebook_login,
+        'can_disconnect': can_disconnect
+    })
+
+@login_required
+def password(request):
+    title="Chewa | Password"
+    if request.user.has_usable_password():
+        PasswordForm = PasswordChangeForm
+    else:
+        PasswordForm = AdminPasswordChangeForm
+
+    if request.method == 'POST':
+        form = PasswordForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('settings')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordForm(request.user)
+    return render(request, 'registration/password.html', {'form': form})
+
+def sign_up(request):
+    title="Chewa | Sign Up"
+    if request.method=='POST':
+        form =UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username=form.cleaned_data.get('username')
+            raw_password=form.cleaned_data.get('password1')
+            user=authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home_page')
+    else:form=UserCreationForm()
+    return render(request, 'registration/sign_up.html', {"form":form, "title":title})
+            
+

@@ -87,6 +87,7 @@ class Lesson (models.Model):
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to = 'chewa_img/',null=True)
+    score = models.ManyToManyField(User, related_name='answer_score', blank=True)
 
     def __str__(self):
         return self.question

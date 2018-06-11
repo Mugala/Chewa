@@ -26,8 +26,10 @@ urlpatterns = [
     path('search', views.luo_test1, name='luo_test1'),
     path('api/lessons', views.LessonList.as_view()),
     path('api-token-auth/', obtain_auth_token),
-    path('api/lesson/lesson-id/<int:pk>/',
-        views.LessonDescription.as_view())
+    path('api/lesson/lesson-id/<int:pk>/',views.LessonDescription.as_view()),
+    path('settings/', views.settings, name='settings'),
+    path('settings/password/', views.password, name='password'),
+    path('signup/', views.sign_up, name='sign_up'),
 ]
 
 if settings.DEBUG:
