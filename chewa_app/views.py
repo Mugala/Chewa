@@ -56,8 +56,17 @@ def lesson (request):
 
 def user_score(request, id):
     current_user=request.user
-    current_user=request.user
     answers = get_object_or_404(Lesson, id=id)
+
+    if current_user in answers.likes.all():
+        photo.likes.add(current_user)
+        photo.likes.remove(current_user)
+        print(current_user)
+        print("hello")
+    else:
+        photo.likes.add(current_user)
+        return redirect('/')
+    return redirect('/')
 
     questions = {
         "How tall is the Eiffel Tower?":['a. 350m', 'b. 342m', 'c. 324m', 'd. 1000ft','a'],

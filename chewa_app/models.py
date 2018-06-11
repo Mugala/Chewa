@@ -41,9 +41,6 @@ class Language (models.Model):
     @classmethod
     def language (cls):
         language_details = cls.objects.all()
-        return language_details
-
-
 class Content (models.Model):
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     category = models.CharField(max_length=60)
@@ -108,7 +105,7 @@ class Score (models.Model):
         return self.user.name
 
     @classmethod
-    def get_likes(cls):
+    def get_scores(cls):
         score=cls.objects.all()
         return score
 
