@@ -96,11 +96,16 @@ LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home_page'
 LOGOUT_REDIRECT_URL = 'home_page'
 
-SOCIAL_AUTH_TWITTER_KEY ='98Ma7sjppaDQNxzyUEqKzoMNq'
-SOCIAL_AUTH_TWITTER_SECRET='ctf4uHbXi0VNJYWbaoXNPtYh91drBuI5nCRhVBDNCAfX7vNu4C'
+SOCIAL_AUTH_TWITTER_KEY ='HAKS2NgyzI0kYqWlzXzvI3bBL'
+SOCIAL_AUTH_TWITTER_SECRET='WlP0htHLGRR2DV8NU911RgBSCy9q9aHmcduIaVlafLEI5DOJem'
+
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='141602475848-8jpmih1ord76vca9mp1r6kegrvi0ibn8.apps.googleusercontent.com' 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'LwzM2v-yrM7VAbKEw_9yaFtS' #Paste Secret Key
+
+request_token_url = 'https://api.twitter.com/oauth/request_token'
+access_token_url = 'https://api.twitter.com/oauth/access_token'
+
 
 WSGI_APPLICATION = 'Chewa.wsgi.application'
 
