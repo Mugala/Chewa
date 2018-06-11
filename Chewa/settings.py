@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'chewa_app',
     'bootstrap3',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'social_django', 
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'Chewa.urls'
@@ -67,10 +69,38 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId', 
+    'social_core.backends.google.GoogleOAuth2',  
+    'social_core.backends.github.GithubOAuth2', 
+    'social_core.backends.facebook.FacebookOAuth2', 
+    'social_core.backends.twitter.TwitterOAuth',
+    
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home_page'
+LOGOUT_REDIRECT_URL = 'home_page'
+
+SOCIAL_AUTH_TWITTER_KEY ='98Ma7sjppaDQNxzyUEqKzoMNq'
+SOCIAL_AUTH_TWITTER_SECRET='ctf4uHbXi0VNJYWbaoXNPtYh91drBuI5nCRhVBDNCAfX7vNu4C'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='141602475848-8jpmih1ord76vca9mp1r6kegrvi0ibn8.apps.googleusercontent.com' 
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'LwzM2v-yrM7VAbKEw_9yaFtS' #Paste Secret Key
 
 WSGI_APPLICATION = 'Chewa.wsgi.application'
 
