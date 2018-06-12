@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import Language,Lesson,Level,Content,Profile,Score
-from .forms import ProfileDetails,LanguageDetails,LessonDetails
+from .models import Language,Lesson,Level,Content,Profile,Score,Answers
+from .forms import ProfileDetails,LanguageDetails,LessonDetails,AnswersDetails
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import LessonSerializer
@@ -35,17 +35,17 @@ def luo_beginning(request):
     return render(request, 'beginner/luo.html')
 
 def luo_test1(request):
-    question= Lesson.objects.all()
+    question= Answers.objects.all()
     single_lesson = Lesson.objects.filter(language_id=3).all()
     print(single_lesson)
 
     if request.method == 'POST':
-        form= LessonDetails(request.POST, request.FILES)
+        form= AnswersDetails(request.POST, request.FILES)
         if form.is_valid():
             single_lesson = form.save(commit = False)
             single_lesson.save()
     else:
-        form = LessonDetails()
+        form = AnswersDetails()
 
     return render(request, 'test1/luo.html',{"question":question,"single_lesson":single_lesson,"form":form})
 

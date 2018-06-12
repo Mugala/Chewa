@@ -4,9 +4,9 @@
 {% block content %}
 <p>luo</p>
 <!-- {% for question_item in question %}
-<p>{{question_item.question}}</p>
+<p>{{question_item.answer}}</p>
 {% endfor %} -->
-
+<!--
 <form  action="{%url 'luo-begin-test'%}" method="post">
   {%csrf_token%}
 
@@ -14,9 +14,17 @@
   {% bootstrap_form form%}
 
   <input type="submit" value="Subscribe">
-</form>
+</form> -->
 
-
+{% for single_lesson_item in single_lesson %}
+<div class="container">
+  <div class="row">
+<p>{{single_lesson_item.question}}</p>
+<p>{{single_lesson_item.answer}}</p>
+<img src="/media/{{single_lesson_item.image}}"style="height:40vh;">
+</div>
+</div>
+{% endfor %}
 
 
 

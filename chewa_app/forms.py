@@ -1,5 +1,5 @@
 from django import forms
-from .models import Language,Profile,Level,Lesson,Content
+from .models import Language,Profile,Level,Lesson,Content,Answers
 
 
 class ProfileDetails (forms.ModelForm):
@@ -20,3 +20,11 @@ class LanguageDetails (forms.ModelForm):
     class Meta:
         model = Language
         fields = ['name', ]
+
+class AnswersDetails (forms.ModelForm):
+    class Meta:
+        model = Answers
+        exclude=['image']
+        widgets = {
+            'answer': forms.CheckboxSelectMultiple(),
+        }
