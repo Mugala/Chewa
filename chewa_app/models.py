@@ -41,6 +41,7 @@ class Language (models.Model):
     @classmethod
     def language (cls):
         language_details = cls.objects.all()
+        
 class Content (models.Model):
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     category = models.CharField(max_length=60)
