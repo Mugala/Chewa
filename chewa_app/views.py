@@ -12,65 +12,17 @@ from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeFor
 from django.contrib.auth import update_session_auth_hash, login, authenticate, logout
 from django.contrib import messages
 from social_django.models import UserSocialAuth
+from django.urls import resolve
 
 
 
 
 def home_page(request):
-
-    return render(request, 'home.html')
-
-def swahili_page(request):
-
-    return render(request, 'languages/swahili.html')
-
-def swahili_beginning(request):
-
-    return render(request, 'beginner/swahili.html')
-
-def swahili_test1(request):
-
-    return render(request, 'test1/swahili.html')
+    languages=Language.objects.all()
+    
 
 
-def luo_page(request):
-
-    return render(request, 'languages/luo.html')
-
-def luo_beginning(request):
-
-    return render(request, 'beginner/luo.html')
-
-def luo_test1(request):
-    question= Lesson.objects.all()
-    single_lesson = Lesson.objects.filter(language_id=3).all()
-    print(single_lesson)
-
-    if request.method == 'POST':
-        form= LessonDetails(request.POST, request.FILES)
-        if form.is_valid():
-            single_lesson = form.save(commit = False)
-            single_lesson.save()
-    else:
-        form = LessonDetails()
-
-    return render(request, 'test1/luo.html',{"question":question,"single_lesson":single_lesson,"form":form})
-
-def kikuyu_page(request):
-
-    return render(request, 'languages/kikuyu.html')
-
-def kikuyu_beginning(request):
-
-    return render(request, 'beginner/kikuyu.html')
-
-def kikuyu_test1(request):
-
-    return render(request, 'test1/kikuyu.html')
-
-def KSL_page(request):
-
-    return render(request, 'languages/KSL.html')
+    return render(request, 'home.html', {"languages":languages})
 
 def profile(request):
     current_user = request.user
@@ -100,7 +52,7 @@ def language (request):
     else:
         language_form = LanguageDetails()
 
-    return render(request, 'dashboard/Language_details.html', {"language_form":language_form})
+    return render(request, 'dashboard/language.html', {"language_form":language_form})
 
 def lesson (request):
     current_user = request.user
@@ -117,39 +69,31 @@ def lesson (request):
 
     return render(request, 'dashboard/Lesson_details.html', {"lesson_form":lesson_form})
 
-def user_score(request, id):
-    current_user=request.user
-    current_user=request.user
-    answers = get_object_or_404(Lesson, id=id)
+def level(request, language):
+    language=request.GET.get('language')
+    levels=Level.objects.all()
+    print(language)
+   
 
-    questions = {
-        "How tall is the Eiffel Tower?":['a. 350m', 'b. 342m', 'c. 324m', 'd. 1000ft','a'],
-        "How loud is a sonic boom?":['a. 160dB', 'b. 175dB', 'c. 157dB', 'd. 213dB', 'd']
-    } 
+    return render(request, 'level.html', {"levels":levels, "language":language})
 
-    score = 0  
-    for question_number,question in enumerate(questions):
-        print ("Question",question_number+1) 
-        print (question)
-        for options in questions[question][:-1]:
-            print (options)
-        user_choice = input("Make your choice : ")
-        if user_choice == questions[question][-1]:
-            print ("Correct!")
-            score += 1 
-        else: 
-            print ("Wrong!")
+def content(request, language, level):
+    language=request.GET.get('language')
+    print(language)
+    currentUrl = request.get_full_path()
+    lan=currentUrl.split('/')
+    
+    language=lan[1]
+    print(language)
+    print(currentUrl)
+    level=request.GET.get('level')
+    print("here" + level)
+    
+    contents=Lesson.objects.filter(level__level=level, language__name=language)
+    print(contents)
+    
+    return render(request, 'content.html', {"contents":contents})
 
-    print(score) 
-       
-    return redirect('/')
-    if current_user in photo.likes.all():
-        photo.likes.add(current_user)
-        photo.likes.remove(current_user)
-    else:
-        photo.likes.add(current_user)
-
-    return redirect('/')
 
 class LessonList(APIView):
     permission_classes = (IsAdminOrReadOnly,)
@@ -193,10 +137,9 @@ class LessonDescription(APIView):
 def settings(request):
     title="Chewa | Settings"
     user = request.user
-    print(user)
     try:
         google_login = user.social_auth.get(provider='google-oauth2')
-        
+
     except UserSocialAuth.DoesNotExist:
         google_login = None
 

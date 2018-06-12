@@ -83,6 +83,8 @@ class Level (models.Model):
 class Lesson (models.Model):
     question = models.CharField(max_length=50)
     answer = models.CharField(max_length=50)
+    choice1=models.CharField(max_length=50)
+    choice2=models.CharField(max_length=50)
     content=models.ForeignKey(Content,on_delete=models.CASCADE)
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)

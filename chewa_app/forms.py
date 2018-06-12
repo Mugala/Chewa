@@ -11,7 +11,7 @@ class ProfileDetails (forms.ModelForm):
 class LessonDetails (forms.ModelForm):
     class Meta:
         model = Lesson
-        exclude = ['image','level','language']
+        exclude = ['image','score']
         widgets = {
             'answers': forms.CheckboxSelectMultiple(),
         }
