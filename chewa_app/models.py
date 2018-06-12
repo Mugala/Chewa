@@ -64,6 +64,12 @@ class Content (models.Model):
     class Meta:
         ordering = ['language']
 
+class Answers(models.Model):
+    answer=models.CharField(max_length=100)
+    image = models.ImageField(upload_to = 'chewa_img/',null=True)
+
+    def __str__(self):
+        return self.answer
 
 class Level (models.Model):
     level = models.CharField(max_length = 30)
@@ -80,7 +86,7 @@ class Level (models.Model):
 
 class Lesson (models.Model):
     question = models.CharField(max_length=50)
-    answer = models.CharField(max_length=50)
+    answer = models.ForeignKey(Answers,on_delete=models.CASCADE)
     content=models.ForeignKey(Content,on_delete=models.CASCADE)
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)
@@ -102,8 +108,8 @@ class Lesson (models.Model):
         return lesson_details
 
     @classmethod
-    def single_lesson(cls,single_category):
-        single = cls.objects.filter(content__category__icontains=single_category)
+    def single(cls,single_category):
+        single = cls.objects.filter(content__category__icontains=single)
         print(single)
         return single
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import Language,Lesson,Level,Content,Profile,Score
-from .forms import ProfileDetails,LanguageDetails,LessonDetails
+from .models import Language,Lesson,Level,Content,Profile,Score,Answers
+from .forms import ProfileDetails,LanguageDetails,LessonDetails,AnswersDetails
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import LessonSerializer
@@ -42,19 +42,40 @@ def luo_beginning(request):
     return render(request, 'beginner/luo.html')
 
 def luo_test1(request):
-    question= Lesson.objects.all()
+    question= Answers.objects.all()
     single_lesson = Lesson.objects.filter(language_id=3).all()
-    print(single_lesson)
+    one_lesson= single_lesson.filter(content__category='Family')
+    one= one_lesson.order_by('?')[:1]
+    print(one)
+    # print(single_lesson)
+    # print(one_lesson)
 
     if request.method == 'POST':
         form= LessonDetails(request.POST, request.FILES)
         if form.is_valid():
-            single_lesson = form.save(commit = False)
-            single_lesson.save()
+            answer = form.save(commit = False)
+            answer.save()
     else:
-        form = LessonDetails()
+        form = AnswersDetails()
 
-    return render(request, 'test1/luo.html',{"question":question,"single_lesson":single_lesson,"form":form})
+
+    return render(request, 'test1/luo.html',{"question":question,"single_lesson":single_lesson,"form":form,"one_lesson":one_lesson,"one":one})
+
+
+'''
+    if 'answer' in request.GET and request.GET["answer"]:
+        single_category = request.GET.get("username")
+        searched_profiles = Profile.search_profile(search_term)
+        message = f"{search_term}"
+
+        return render(request,'gram/search.html',{"message":message, "username":searched_profiles})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'gram/search.html',{"message":message})
+
+'''
+
 
 def kikuyu_page(request):
 
