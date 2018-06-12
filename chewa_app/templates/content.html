@@ -4,9 +4,17 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            {% for content in contents %}
-            <p>Question: {{content.question }}</p>
-            {% endfor %}
+            {{contents.language}}
+            
+            <h1>Question: {{contents.question }}</h1>
+            <form>
+                <input type="radio" name="{{contents.answer}}"value="{{contents.answer}}">{{contents.answer}}
+                <input type="radio" name="{{contents.choice1}}"value="{{contents.choice1}}">{{contents.choice1}}
+                <input type="radio" name="{{contents.choice2}}"value="{{contents.choice1}}">{{contents.choice2}}
+                
+            </form>
+           
+            
         </div>
     </div>
 </div>

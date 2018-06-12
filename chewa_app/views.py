@@ -13,6 +13,7 @@ from django.contrib.auth import update_session_auth_hash, login, authenticate, l
 from django.contrib import messages
 from social_django.models import UserSocialAuth
 from django.urls import resolve
+import random
 
 
 
@@ -91,8 +92,9 @@ def content(request, language, level):
     
     contents=Lesson.objects.filter(level__level=level, language__name=language)
     print(contents)
+    chosen=random.choice(contents)
     
-    return render(request, 'content.html', {"contents":contents})
+    return render(request, 'content.html', {"contents":chosen})
 
 
 class LessonList(APIView):
