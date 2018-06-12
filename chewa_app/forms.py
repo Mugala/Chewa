@@ -11,10 +11,12 @@ class ProfileDetails (forms.ModelForm):
 class LessonDetails (forms.ModelForm):
     class Meta:
         model = Lesson
-        exclude = ['image','level','language']
+        fields = ['answer']
+        exclude = ['image','level','language','question','content']
         widgets = {
-            'answers': forms.CheckboxSelectMultiple(),
+            'answers': forms.RadioSelect(),
         }
+
 
 class LanguageDetails (forms.ModelForm):
     class Meta:
@@ -23,8 +25,6 @@ class LanguageDetails (forms.ModelForm):
 
 class AnswersDetails (forms.ModelForm):
     class Meta:
+
         model = Answers
-        exclude=['image']
-        widgets = {
-            'answer': forms.CheckboxSelectMultiple(),
-        }
+        fields =['answer','image']

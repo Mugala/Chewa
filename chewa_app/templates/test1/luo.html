@@ -2,29 +2,37 @@
 {% load bootstrap3 %}
 
 {% block content %}
-<p>luo</p>
-<!-- {% for question_item in question %}
-<p>{{question_item.answer}}</p>
-{% endfor %} -->
-<!--
-<form  action="{%url 'luo-begin-test'%}" method="post">
-  {%csrf_token%}
 
 
-  {% bootstrap_form form%}
+{% for one_item in one %}
+<h3>{{one_item.question}}</h3>
+{% endfor %}
 
-  <input type="submit" value="Subscribe">
-</form> -->
 
-{% for single_lesson_item in single_lesson %}
+<div class="container">
+
+{% for one_lesson_item in one_lesson%}
+<div class="row">
+  <div class="col-md-12">
+<img src="/media/{{one_lesson_item.image}}" style="height:30vh;">
+<h1>{{one_lesson_item.answer}}</h1>
+<input type="radio" name="{{single_lesson.answer}}" value="0">
+</div>
+</div>
+{% endfor %}
+
+</div>
+
+<!-- {% for single_lesson_item in single_lesson %}
 <div class="container">
   <div class="row">
 <p>{{single_lesson_item.question}}</p>
+<input type="radio" name="{{single_lesson.answer}}" value="0">
 <p>{{single_lesson_item.answer}}</p>
 <img src="/media/{{single_lesson_item.image}}"style="height:40vh;">
 </div>
 </div>
-{% endfor %}
+{% endfor %} -->
 
 
 

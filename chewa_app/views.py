@@ -37,17 +37,38 @@ def luo_beginning(request):
 def luo_test1(request):
     question= Answers.objects.all()
     single_lesson = Lesson.objects.filter(language_id=3).all()
-    print(single_lesson)
+    one_lesson= single_lesson.filter(content__category='Family')
+    one= one_lesson.order_by('?')[:1]
+    print(one)
+    # print(single_lesson)
+    # print(one_lesson)
 
     if request.method == 'POST':
-        form= AnswersDetails(request.POST, request.FILES)
+        form= LessonDetails(request.POST, request.FILES)
         if form.is_valid():
-            single_lesson = form.save(commit = False)
-            single_lesson.save()
+            answer = form.save(commit = False)
+            answer.save()
     else:
         form = AnswersDetails()
 
-    return render(request, 'test1/luo.html',{"question":question,"single_lesson":single_lesson,"form":form})
+
+    return render(request, 'test1/luo.html',{"question":question,"single_lesson":single_lesson,"form":form,"one_lesson":one_lesson,"one":one})
+
+
+'''
+    if 'answer' in request.GET and request.GET["answer"]:
+        single_category = request.GET.get("username")
+        searched_profiles = Profile.search_profile(search_term)
+        message = f"{search_term}"
+
+        return render(request,'gram/search.html',{"message":message, "username":searched_profiles})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'gram/search.html',{"message":message})
+
+'''
+
 
 def kikuyu_page(request):
 
