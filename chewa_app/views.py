@@ -68,31 +68,36 @@ def user_score(request, id):
         return redirect('/')
     return redirect('/')
 
-    questions = {
-        "How tall is the Eiffel Tower?":['a. 350m', 'b. 342m', 'c. 324m', 'd. 1000ft','a'],
-        "How loud is a sonic boom?":['a. 160dB', 'b. 175dB', 'c. 157dB', 'd. 213dB', 'd']
-    } 
+#     questions = {
+#         "What is Today in Kiswahili?":['a. Jana', 'b. Kesho', 'c. Juzi', 'd. Leo','d'],
+#         "What is Afternoon in Kiswahili?":['a. Asubuhi', 'b. Jioni', 'c. Usiku', 'd. Alfajiri', 'd'],
+#         "What is hello in Kiswahili?":['a. Habari', 'b. mzuri', 'c. Hapana', 'd. yeye', 'a'],
+#         "What is Father in Kiswahili?":['a. Ndugu', 'b. Baba', 'c. Mama', 'd. dada', 'b'],
+#         "What is Thank you in Kiswahili?":['a. Ndio', 'b. Mzuri', 'c. Asante', 'd. Kesho', 'c']
+#     } 
 
-    score = 0  
-    for question_number,question in enumerate(questions):
-        print ("Question",question_number+1) 
-        print (question)
-        for options in questions[question][:-1]:
-            print (options)
-        user_choice = input("Make your choice : ")
-        if user_choice == questions[question][-1]:
-            print ("Correct!")
-            score += 1 
-        else: 
-            print ("Wrong!")
+# score = 0  
+# for question_number,question in enumerate(questions,start=1):
+#     print ("Question",question_number) 
+#     print (question)
+#     for options in questions[question][:-1]:
+#         print (options)
+#     choice = input("Make your choice : ")
+#     user_choice = choice.lower()
+#     if user_choice == questions[question][-1]:
+#         print ("Correct!")
+#         score += 1 
+#     else: 
+#         print ("Wrong!")
+# result = "Your total score is " + str(score)
 
-    print(score) 
+# print(result)
        
-    return redirect('/')
-    if current_user in photo.likes.all():
-        photo.likes.add(current_user)
-        photo.likes.remove(current_user)
-    else:
-        photo.likes.add(current_user)
-       
-    return redirect('/')
+    # return redirect('/')
+    #     if current_user in photo.likes.all():
+    #         photo.likes.add(current_user)
+    #         photo.likes.remove(current_user)
+    #     else:
+    #         photo.likes.add(current_user)
+        
+    #     return redirect('/')
