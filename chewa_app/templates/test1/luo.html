@@ -5,35 +5,23 @@
 
 
 {% for one_item in one %}
-<h3>{{one_item.question}}</h3>
+<h3 style="font-family: 'Quicksand', sans-serif;font-size:2.42em;color:#82cadf;margin-left:1em;margin-top:1em;">{{one_item.question}}</h3>
 {% endfor %}
 
 
-<div class="container">
-
-{% for one_lesson_item in one_lesson%}
+<div class="container" style="text-align:center;margin-top:3em;margin-left:0.8em;font-family: 'Quicksand', sans-serif;font-size:2.42em;color:#82cadf;margin-bottom:2em;">
 <div class="row">
-  <div class="col-md-12">
-<img src="/media/{{one_lesson_item.image}}" style="height:30vh;">
+{% for one_lesson_item in one_lesson%}
+
+  <div class="col-md-4">
+<img src="/media/{{one_lesson_item.image}}" style="height:8em;">
 <h1>{{one_lesson_item.answer}}</h1>
 <input type="radio" name="{{single_lesson.answer}}" value="0">
 </div>
-</div>
+
 {% endfor %}
-
-</div>
-
-<!-- {% for single_lesson_item in single_lesson %}
-<div class="container">
-  <div class="row">
-<p>{{single_lesson_item.question}}</p>
-<input type="radio" name="{{single_lesson.answer}}" value="0">
-<p>{{single_lesson_item.answer}}</p>
-<img src="/media/{{single_lesson_item.image}}"style="height:40vh;">
 </div>
 </div>
-{% endfor %} -->
-
 
 
 

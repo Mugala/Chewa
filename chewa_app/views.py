@@ -37,6 +37,7 @@ def luo_beginning(request):
 def luo_test1(request):
     question= Answers.objects.all()
     single_lesson = Lesson.objects.filter(language_id=3).all()
+    
     one_lesson= single_lesson.filter(content__category='Family')
     one= one_lesson.order_by('?')[:1]
     print(one)
