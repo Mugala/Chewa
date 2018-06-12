@@ -1,0 +1,24 @@
+{% extends 'dashboard/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<p>luo</p>
+<!-- {% for question_item in question %}
+<p>{{question_item.question}}</p>
+{% endfor %} -->
+
+<form  action="{%url 'luo-begin-test'%}" method="post">
+  {%csrf_token%}
+
+
+  {% bootstrap_form form%}
+
+  <input type="submit" value="Subscribe">
+</form>
+
+
+
+
+
+
+{% endblock %}

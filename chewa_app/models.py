@@ -10,16 +10,16 @@ class Profile (models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
     score = models.ManyToManyField(User, blank=True)
-    
+
     def __str__(self):
         return self.name
-    
+
     def save_Profile(self):
         self.save()
 
     def delete_Profile(self):
         self.delete()
-    
+
     @classmethod
     def profile (cls):
         profile_details = cls.objects.all()
@@ -36,8 +36,8 @@ class Language (models.Model):
         self.save()
 
     def delete_Language(self):
-        self.delete()   
-    
+        self.delete()
+
     @classmethod
     def language (cls):
         language_details = cls.objects.all()
@@ -46,14 +46,14 @@ class Content (models.Model):
     category = models.CharField(max_length=60)
 
     def __str__(self):
-        return self.language
+        return self.category
 
     def save_Content(self):
         self.save()
 
     def delete_Content(self):
         self.delete()
-        
+
 
     @classmethod
     def content_details(cls):
@@ -80,11 +80,14 @@ class Level (models.Model):
 class Lesson (models.Model):
     question = models.CharField(max_length=50)
     answer = models.CharField(max_length=50)
+    content=models.ForeignKey(Content,on_delete=models.CASCADE)
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to = 'chewa_img/',null=True)
     score = models.ManyToManyField(User, related_name='answer_score', blank=True)
 
+    def __str__(self):
+        return self.question
 
     def save_Lesson(self):
         self.save()
@@ -97,6 +100,12 @@ class Lesson (models.Model):
         lesson_details = cls.objects.all()
         return lesson_details
 
+    @classmethod
+    def single_lesson(cls,single_category):
+        single = cls.objects.filter(content__category__icontains=single_category)
+        print(single)
+        return single
+
 class Score (models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     score=models.IntegerField(default=0, null=True)
@@ -108,5 +117,3 @@ class Score (models.Model):
     def get_scores(cls):
         score=cls.objects.all()
         return score
-
-

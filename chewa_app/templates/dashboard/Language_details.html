@@ -1,18 +1,22 @@
 {%extends 'dashboard/base.html'%} {%load bootstrap3 %} {% block content %}
 <div class="container">
   <div class="row">
-    <h1> Language</h1>
+    <h1 style="font-family: 'Quicksand', sans-serif;font-size:2.42em;color:#82cadf;"> Languages to learn</h1>
     <hr>
-    <div class="col-md-6">
-      {{form.media}}
 
-      <form action="{% url 'language'%}" method="post" enctype="multipart/form-data">
-        {% csrf_token %} {% bootstrap_form language_form %}
-        <input type="submit" class="btn btn-success" value="post">
-        <input type="hidden" name="next" value="{{next}}">
-      </form>
+    <div class="container" style="margin-left:3em;display:inline-block;margin-top:5em;opacity:0.8;font-family: 'Quicksand'">
 
-    </div>
+<a href="{% url 'ksl'%}"><button type="button" class="btn btn-info btn-rounded" style="height:15em;width:15em;"><span style="font-size:3em;" >KSL</span></button></a>
+
+
+  <a href="{% url 'luo'%}"><button type="button" class="btn btn-info btn-rounded" style="height:15em;width:15em;margin-left:0.8em;"><span style="font-size:3em;">Dholuo</span></button></a>
+
+
+  <a href="{% url 'kikuyu'%}"><button type="button" class="btn btn-info btn-rounded" style="height:15em;width:15em;margin-left:0.8em;"><span style="font-size:3em;">Kikuyu<span></button></a>
+
+
+  <a href="{% url 'swahili'%}"><button type="button" class="btn btn-info btn-rounded" style="height:15em;width:15em;margin-left:0.8em;"><span style="font-size:3em;">Kiswahili</span></button></a>
   </div>
+</div>
 </div>
 {% endblock %}
