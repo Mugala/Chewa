@@ -7,11 +7,70 @@ from rest_framework.views import APIView
 from .serializer import LessonSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm, UserCreationForm
+from django.contrib.auth import update_session_auth_hash, login, authenticate, logout
+from django.contrib import messages
+from social_django.models import UserSocialAuth
+
+
 
 
 def home_page(request):
 
     return render(request, 'home.html')
+
+def swahili_page(request):
+
+    return render(request, 'languages/swahili.html')
+
+def swahili_beginning(request):
+
+    return render(request, 'beginner/swahili.html')
+
+def swahili_test1(request):
+
+    return render(request, 'test1/swahili.html')
+
+
+def luo_page(request):
+
+    return render(request, 'languages/luo.html')
+
+def luo_beginning(request):
+
+    return render(request, 'beginner/luo.html')
+
+def luo_test1(request):
+    question= Lesson.objects.all()
+    single_lesson = Lesson.objects.filter(language_id=3).all()
+    print(single_lesson)
+
+    if request.method == 'POST':
+        form= LessonDetails(request.POST, request.FILES)
+        if form.is_valid():
+            single_lesson = form.save(commit = False)
+            single_lesson.save()
+    else:
+        form = LessonDetails()
+
+    return render(request, 'test1/luo.html',{"question":question,"single_lesson":single_lesson,"form":form})
+
+def kikuyu_page(request):
+
+    return render(request, 'languages/kikuyu.html')
+
+def kikuyu_beginning(request):
+
+    return render(request, 'beginner/kikuyu.html')
+
+def kikuyu_test1(request):
+
+    return render(request, 'test1/kikuyu.html')
+
+def KSL_page(request):
+
+    return render(request, 'languages/KSL.html')
 
 def profile(request):
     current_user = request.user
@@ -25,7 +84,7 @@ def profile(request):
             return redirect("home_page")
     else:
         form = ProfileDetails()
-    
+
     return render(request, 'dashboard/profile.html', {"form":form})
 
 def language (request):
@@ -40,7 +99,7 @@ def language (request):
             return redirect("home_page")
     else:
         language_form = LanguageDetails()
-    
+
     return render(request, 'dashboard/Language_details.html', {"language_form":language_form})
 
 def lesson (request):
@@ -55,7 +114,7 @@ def lesson (request):
             return redirect("home_page")
     else:
         lesson_form = LessonDetails()
-    
+
     return render(request, 'dashboard/Lesson_details.html', {"lesson_form":lesson_form})
 
 def user_score(request, id):
@@ -89,7 +148,7 @@ def user_score(request, id):
         photo.likes.remove(current_user)
     else:
         photo.likes.add(current_user)
-       
+
     return redirect('/')
 
 class LessonList(APIView):
@@ -97,7 +156,7 @@ class LessonList(APIView):
     def get(self, request, format=None):
         all_lessons = Lesson.objects.all()
         serializers= LessonSerializer(all_lessons, many=True)
-        return Response(serializers.data) 
+        return Response(serializers.data)
 
     def post(self, request, format=None):
         serializers= LessonSerializer(data=request.data)
@@ -105,7 +164,7 @@ class LessonList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
 class LessonDescription(APIView):
     permission_classes=(IsAdminOrReadOnly,)
     def get_lesson(self, pk):
@@ -129,3 +188,64 @@ class LessonDescription(APIView):
         lesson=self.get_lesson(pk)
         lesson.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@login_required
+def settings(request):
+    title="Chewa | Settings"
+    user = request.user
+    print(user)
+    try:
+        google_login = user.social_auth.get(provider='google-oauth2')
+        
+    except UserSocialAuth.DoesNotExist:
+        google_login = None
+
+    try:
+        facebook_login = user.social_auth.get(provider='facebook')
+    except UserSocialAuth.DoesNotExist:
+        facebook_login = None
+
+    can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
+
+    return render(request, 'registration/settings.html', {
+        'google_login': google_login,
+        'facebook_login': facebook_login,
+        'can_disconnect': can_disconnect
+    })
+
+@login_required
+def password(request):
+    title="Chewa | Password"
+    if request.user.has_usable_password():
+        PasswordForm = PasswordChangeForm
+    else:
+        PasswordForm = AdminPasswordChangeForm
+
+    if request.method == 'POST':
+        form = PasswordForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('settings')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordForm(request.user)
+    return render(request, 'registration/password.html', {'form': form})
+
+def sign_up(request):
+    title="Chewa | Sign Up"
+    if request.method=='POST':
+        form =UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username=form.cleaned_data.get('username')
+            raw_password=form.cleaned_data.get('password1')
+            user=authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home_page')
+    else:form=UserCreationForm()
+    return render(request, 'registration/sign_up.html', {"form":form, "title":title})
+            
+

@@ -1,1 +1,11 @@
-<h1>Chewa</h1>
+{% extends 'dashboard/main.html'%}
+{% load static %}
+{% block content %}
+
+<!-- <h1>Chewa</h1> -->
+<a href="{% url 'language'%}">
+<img src="media/logo.jpg" style="height:10em;margin-left:24em;margin-top:15em;">
+</a>
+<h2 style="font-family: 'Quicksand', sans-serif;margin-left:7.8em;font-size:2.42em;color:#82cadf">hello &bull;  habari &bull;  amosi &bull; mrembe</h2>
+
+{% endblock %}
