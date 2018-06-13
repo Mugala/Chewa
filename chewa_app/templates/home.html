@@ -1,11 +1,21 @@
-{% extends 'dashboard/main.html'%}
+{% extends 'dashboard/base.html'%}
 {% load static %}
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Hey {{user.username}}</h2>
+                <h3>Choose a language to learn</h3>
+                {% for language in languages %}
+                <form action="{% url 'level' language.name %}">
+                    <input method='get' type="submit" value="{{language.name}}", name="language">
+                </form>
+                
+                {% endfor %}
+        </div>
+    </div>
+</div>
 
-<!-- <h1>Chewa</h1> -->
-<a href="{% url 'language'%}">
-<img src="media/logo.jpg" style="height:10em;margin-left:24em;margin-top:15em;">
-</a>
-<h2 style="font-family: 'Quicksand', sans-serif;margin-left:7.8em;font-size:2.42em;color:#82cadf">hello &bull;  habari &bull;  amosi &bull; mrembe</h2>
+
 
 {% endblock %}

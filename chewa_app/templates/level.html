@@ -1,0 +1,21 @@
+{% extends 'dashboard/base.html'%}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Current_user: {{user.username}}</h2>
+                <h3>What Level are you on:</h3>
+                {% for level in levels %}
+                <form action="{% url 'content' language=language level=level.level %}">
+                        <input method='get' type="submit" value="{{level.level}}", name="level">
+                    </form>
+                
+                {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

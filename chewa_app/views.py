@@ -12,86 +12,18 @@ from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeFor
 from django.contrib.auth import update_session_auth_hash, login, authenticate, logout
 from django.contrib import messages
 from social_django.models import UserSocialAuth
+from django.urls import resolve
+import random
 
 
 
 
 def home_page(request):
-
-    return render(request, 'home.html')
-
-def swahili_page(request):
-
-    return render(request, 'languages/swahili.html')
-
-def swahili_beginning(request):
-
-    return render(request, 'beginner/swahili.html')
-
-def swahili_test1(request):
-
-    return render(request, 'test1/swahili.html')
+    languages=Language.objects.all()
+    
 
 
-def luo_page(request):
-
-    return render(request, 'languages/luo.html')
-
-def luo_beginning(request):
-
-    return render(request, 'beginner/luo.html')
-
-def luo_test1(request):
-    question= Answers.objects.all()
-    single_lesson = Lesson.objects.filter(language_id=3).all()
-    one_lesson= single_lesson.filter(content__category='Family')
-    one= one_lesson.order_by('?')[:1]
-    print(one)
-    # print(single_lesson)
-    # print(one_lesson)
-
-    if request.method == 'POST':
-        form= LessonDetails(request.POST, request.FILES)
-        if form.is_valid():
-            answer = form.save(commit = False)
-            answer.save()
-    else:
-        form = AnswersDetails()
-
-
-    return render(request, 'test1/luo.html',{"question":question,"single_lesson":single_lesson,"form":form,"one_lesson":one_lesson,"one":one})
-
-
-'''
-    if 'answer' in request.GET and request.GET["answer"]:
-        single_category = request.GET.get("username")
-        searched_profiles = Profile.search_profile(search_term)
-        message = f"{search_term}"
-
-        return render(request,'gram/search.html',{"message":message, "username":searched_profiles})
-
-    else:
-        message = "You haven't searched for any term"
-        return render(request, 'gram/search.html',{"message":message})
-
-'''
-
-
-def kikuyu_page(request):
-
-    return render(request, 'languages/kikuyu.html')
-
-def kikuyu_beginning(request):
-
-    return render(request, 'beginner/kikuyu.html')
-
-def kikuyu_test1(request):
-
-    return render(request, 'test1/kikuyu.html')
-
-def KSL_page(request):
-
-    return render(request, 'languages/KSL.html')
+    return render(request, 'home.html', {"languages":languages})
 
 def profile(request):
     current_user = request.user
@@ -121,7 +53,7 @@ def language (request):
     else:
         language_form = LanguageDetails()
 
-    return render(request, 'dashboard/Language_details.html', {"language_form":language_form})
+    return render(request, 'dashboard/language.html', {"language_form":language_form})
 
 def lesson (request):
     current_user = request.user
@@ -138,19 +70,32 @@ def lesson (request):
 
     return render(request, 'dashboard/Lesson_details.html', {"lesson_form":lesson_form})
 
-def user_score(request, id):
-    current_user=request.user
-    answers = get_object_or_404(Lesson, id=id)
+def level(request, language):
+    language=request.GET.get('language')
+    levels=Level.objects.all()
+    print(language)
+   
 
-    if current_user in answers.likes.all():
-        photo.likes.add(current_user)
-        photo.likes.remove(current_user)
-        print(current_user)
-        print("hello")
-    else:
-        photo.likes.add(current_user)
+    return render(request, 'level.html', {"levels":levels, "language":language})
 
-    return redirect('/')
+def content(request, language, level):
+    language=request.GET.get('language')
+    print(language)
+    currentUrl = request.get_full_path()
+    lan=currentUrl.split('/')
+    
+    language=lan[1]
+    print(language)
+    print(currentUrl)
+    level=request.GET.get('level')
+    print("here" + level)
+    
+    contents=Lesson.objects.filter(level__level=level, language__name=language)
+    print(contents)
+    chosen=random.choice(contents)
+    
+    return render(request, 'content.html', {"contents":chosen})
+
 
 class LessonList(APIView):
     permission_classes = (IsAdminOrReadOnly,)
@@ -194,10 +139,9 @@ class LessonDescription(APIView):
 def settings(request):
     title="Chewa | Settings"
     user = request.user
-    print(user)
     try:
         google_login = user.social_auth.get(provider='google-oauth2')
-        
+
     except UserSocialAuth.DoesNotExist:
         google_login = None
 

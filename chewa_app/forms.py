@@ -11,8 +11,7 @@ class ProfileDetails (forms.ModelForm):
 class LessonDetails (forms.ModelForm):
     class Meta:
         model = Lesson
-        fields = ['answer']
-        exclude = ['image','level','language','question','content']
+        exclude = ['image','score']
         widgets = {
             'answers': forms.RadioSelect(),
         }
