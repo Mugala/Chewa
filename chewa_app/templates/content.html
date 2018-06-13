@@ -7,13 +7,13 @@
             {{contents.language}}
             
             <h1>Question: {{contents.question }}</h1>
-            <form>
-                <input type="radio" name="{{contents.answer}}"value="{{contents.answer}}">{{contents.answer}}
-                <input type="radio" name="{{contents.choice1}}"value="{{contents.choice1}}">{{contents.choice1}}
-                <input type="radio" name="{{contents.choice2}}"value="{{contents.choice1}}">{{contents.choice2}}
-                
-            </form>
-           
+            <form action="{% url "content" language=contents.language.name level=contents.level.level %}" method="post">
+                    {% csrf_token %}
+                <input type="radio" name="{{contents.content}}" value="{{contents.answer}}" checked> {{contents.answer}}<br>
+                <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"> {{contents.choice1}}<br>
+                <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"> {{contents.choice1}} <br>
+                <input type="submit" value="Submit">
+              </form>
             
         </div>
     </div>

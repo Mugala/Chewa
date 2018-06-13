@@ -88,7 +88,7 @@ def content(request, language, level):
     print(language)
     print(currentUrl)
     level=request.GET.get('level')
-    print("here" + level)
+    # print("here" + level)
     
     contents=Lesson.objects.filter(level__level=level, language__name=language)
     print(contents)
