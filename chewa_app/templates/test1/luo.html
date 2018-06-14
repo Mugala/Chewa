@@ -1,0 +1,26 @@
+{% extends 'dashboard/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+
+{% for one_item in one %}
+<h3>{{one_item.question}}</h3>
+{% endfor %}
+
+
+<div class="container">
+
+{% for one_lesson_item in one_lesson%}
+<div class="row">
+  <div class="col-md-12">
+<img src="/media/{{one_lesson_item.image}}" style="height:30vh;">
+<h1>{{one_lesson_item.answer}}</h1>
+<input type="radio" name="{{single_lesson.answer}}" value="0">
+</div>
+</div>
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'dashboard/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
+{% block styles %}
+{% bootstrap_css %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{%endblock %}
+{% block content %}
+{{block.super}}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+                <p>Username:{{profile.name}}</p>
+                <div id="total_score">
+                        <p>Your total_score : {{ profile.total_score}}</p>
+                </div>
+                
+            <h4>You are currently learning:{{contents.language}} </h4>
+            <p>This question has {{contents.score}} points</p>
+                
+            <h1>Question: {{contents.question }}</h1>
+            <form id="get_answer" action="{% url 'answer' contents.score %}">
+                <input type="radio" name="{{contents.content}}" value="{{contents.answer}}" id="correct"> {{contents.answer}}<br>
+                <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"checked> {{contents.choice1}}<br>
+                <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"> {{contents.choice1}} <br>
+                <input type="submit">
+              </form>
+              <div id="response">
+                
+                </div>
+                <button id="reveal_answer" >Show answer</button>
+                <div class="show_answer">
+                    {{contents.answer}}
+                </div>
+                <form action="{% url 'content' language=contents.language level=contents.level %}">
+                        <input type="hidden" method='get' type="submit" value="{{contents.level}}", name="level">
+                        <button class="btn btn-info">Next Question</button>
+                    </form>
+                
+                
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+     $(document).ready(function(){
+         /*hide and show answer*/
+         $('.show_answer').hide();
+         $('#reveal_answer').click(function(){
+            $('.show_answer').toggle()
+         })
+        $("#get_answer").submit(function(event){
+            event.preventDefault();
+            var url = document.getElementById('get_answer').getAttribute('action');
+            // var {{contents.content}}= document.getElementsByTagName('input').val()
+            console.log(url)
+            form=$('#get_answer')           
+            answer=$('input[name={{contents.content}}]:checked').val();
+            correct=$('#correct').val();
+           
+            if(answer==correct){
+                $.ajax({
+                    'url':url,
+                    'type':'POST',
+                    'data':$(this).serialize(),
+                    'dataType':'json',
+                    'success': function(response){
+                    $("#total_score").html(`<p>Your total_score : ${ response.total_score}</p>`);
+                    $("#response").html(`<h5 style="color:green;">Correct!</h5>`)
+                        
+                    },
+                    })              
+            }
+            else{
+                $("#response").html(`<h5 style="color:red;">Wrong. Try again!</h5>`)
+                form[0].reset();
+            }
+           
+        
+        })
+    });
+       
+   
+</script>
+
+
+{% block scripts %}
+{{block.super}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type='text/javascript' src="{% static 'js/scripts.js'%}"></script>
+
+{% endblock %}
+
+
+{% endblock %}
+
+if(answer===""){
+    $("#response").html(`<h5 style="color:red;">Please key in value</h5>`)
+}

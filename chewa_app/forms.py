@@ -1,5 +1,5 @@
 from django import forms
-from .models import Language,Profile,Level,Lesson,Content
+from .models import Language,Profile,Level,Lesson,Content,Answers
 
 
 class ProfileDetails (forms.ModelForm):
@@ -11,13 +11,19 @@ class ProfileDetails (forms.ModelForm):
 class LessonDetails (forms.ModelForm):
     class Meta:
         model = Lesson
-        fields = ['question', 'answer', 'image','level','language', ]
-       
+        exclude = ['image']
+        widgets = {
+            'answers': forms.RadioSelect(),
+        }
 
 
-    
 class LanguageDetails (forms.ModelForm):
     class Meta:
         model = Language
         fields = ['name', ]
 
+class AnswersDetails (forms.ModelForm):
+    class Meta:
+
+        model = Answers
+        fields =['answer','image']
