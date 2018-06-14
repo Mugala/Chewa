@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
 from .models import Language,Lesson,Level,Content,Profile,Score,Question
-from .forms import ProfileDetails,LanguageDetails,LessonDetails
+from .forms import ProfileDetails,LanguageDetails,LessonDetails,AnswersDetails,QuestionDetails
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import LessonSerializer
@@ -71,6 +71,37 @@ def lesson (request):
         lesson_form = LessonDetails()
 
     return render(request, 'dashboard/Lesson_details.html', {"lesson_form":lesson_form})
+
+
+def question (request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = QuestionDetails(request.POST, request.FILES)
+        if form.is_valid():
+            Question = form.save(commit=False)
+            Question.user = current_user
+            Question.save()
+
+            return redirect("answerform")
+    else:
+        question_form = QuestionDetails()
+
+    return render(request, 'dashboard/question.html', {"question_form":question_form})
+
+def answerform (request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = AnswersDetails(request.POST, request.FILES)
+        if form.is_valid():
+            Answer = form.save(commit=False)
+            Answer.user = current_user
+            Answer.save()
+
+            return redirect("lesson")
+    else:
+        answer_form = AnswersDetails()
+
+    return render(request, 'dashboard/answer.html', {"answer_form":answer_form})
 
 def level(request, language):
     language=request.GET.get('language')
@@ -205,29 +236,6 @@ def score(request):
     get_score = Score.get_scores()
     get_lesson = Lesson.lesson_details()
     print(get_lesson)
-
-    questions = {
-        "What is Today in Kiswahili?":['a. Jana', 'b. Kesho', 'c. Juzi', 'd. Leo','d'],
-        "What is hello in Kiswahili?":['a. Habari', 'b. mzuri', 'c. Hapana', 'd. yeye', 'a']
-    } 
-
-    # score = 0  
-    # for question_number,question in enumerate(questions,start=1):
-    #     print ("Question",question_number) 
-    #     print (question)
-    #     for options in questions[question][:-1]:
-    #         print (options)
-    #     choice = input("Make your choice : ")
-        
-    #     user_choice = choice.lower()
-    #     if user_choice == questions[question][-1]:
-    #         print ("Correct!")
-    #         score += 1 
-    #     else: 
-    #         print ("Wrong!")
-    # scores = (score)
-
-    # print(scores)
 
     return render(request, 'dashboard/score.html', {"scores":score})
 
