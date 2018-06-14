@@ -9,7 +9,7 @@
             <h1>Question: {{contents.question }}</h1>
             <form action="{% url "content" language=contents.language.name level=contents.level.level %}" method="post">
                     {% csrf_token %}
-                <input type="radio" name="{{contents.content}}" value="{{contents.answer}}" checked> {{contents.answer}}<br>
+                <input type="radio" name="{{contents.content}}" id="correct" value="{{contents.answer}}"> {{contents.answer}}<br>
                 <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"> {{contents.choice1}}<br>
                 <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"> {{contents.choice1}} <br>
                 <input type="submit" value="Submit">
@@ -18,7 +18,24 @@
         </div>
     </div>
 </div>
-
+<script>
+    // $(document).ready(function(){
+    //     alert("Hello");
+    //     $("form").submit(function(event){
+    //         event.preventDefault();
+    //         answer=$('input[name={{contents.content}}]:checked').val();
+    //         correct=$('#correct').val();
+    //         score = 0
+    //         if(answer==correct){
+    //             alert("correct");                
+    //         }
+    //         else{
+    //             alert("wrong try again");
+    //         }
+    //     })
+    // });
+   
+</script>
 
 
 {% endblock %}

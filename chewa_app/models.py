@@ -86,7 +86,7 @@ class Level (models.Model):
 
 class Lesson (models.Model):
     question = models.CharField(max_length=50)
-    answer = models.CharField(max_length=50)
+    answer = models.ForeignKey(Answers, on_delete=models.CASCADE)
     choice1=models.CharField(max_length=50)
     choice2=models.CharField(max_length=50)
     content=models.ForeignKey(Content,on_delete=models.CASCADE)
@@ -97,6 +97,7 @@ class Lesson (models.Model):
 
     def __str__(self):
         return self.question
+    
 
     def save_Lesson(self):
         self.save()
@@ -115,12 +116,19 @@ class Lesson (models.Model):
         print(single)
         return single
 
+    @classmethod
+    def search_answers(cls,search_term):
+        ans = cls.objects.filter(answer__answer__icontains=search_term)
+        print(ans)
+        return ans
+        
+        
 class Score (models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     score=models.IntegerField(default=0, null=True)
 
     def __str__(self):
-        return self.user.name
+        return self.score
 
     @classmethod
     def get_scores(cls):

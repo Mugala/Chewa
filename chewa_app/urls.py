@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.home_page, name='home_page'),
     path('profile/', views.profile, name='profile'),
     path('language/', views.language, name='language'),
+    path('score/', views.score, name='score'),
     path('lesson/', views.lesson, name='lesson'),
     path('<language>/level/', views.level, name='level'),
     path('<language>/<level>/lesson', views.content, name='content'),
@@ -17,6 +18,7 @@ urlpatterns = [
     path('settings/', views.settings, name='settings'),
     path('settings/password/', views.password, name='password'),
     path('signup/', views.sign_up, name='sign_up'),
+    path('search/', views.search_results, name='search_results'),
 ]
 
 if settings.DEBUG:
