@@ -16,7 +16,7 @@
                 </div>
                 
             <h4>You are currently learning:{{contents.language}} </h4>
-            
+                
             <h1>Question: {{contents.question }}</h1>
             <form id="get_answer" action="{% url 'answer' %}">
                 <input type="radio" name="{{contents.content}}" value="{{contents.answer}}" id="correct"> {{contents.answer}}<br>
@@ -25,9 +25,14 @@
                 <input type="submit">
               </form>
               <div id="response">
-                should appear here
+                
                 </div>
-            
+                <form action="{% url 'content' language=contents.language level=contents.level %}">
+                        <input type="hidden" method='get' type="submit" value="{{contents.level}}", name="level">
+                        <button>Next Question</button>
+                    </form>
+                
+                
         </div>
     </div>
 </div>
@@ -36,12 +41,12 @@
 
 <script>
      $(document).ready(function(){
-        $("form").submit(function(event){
+        $("#get_answer").submit(function(event){
             event.preventDefault();
             var url = document.getElementById('get_answer').getAttribute('action');
             // var {{contents.content}}= document.getElementsByTagName('input').val()
             console.log(url)
-            form=$('form')           
+            form=$('#get_answer')           
             answer=$('input[name={{contents.content}}]:checked').val();
             correct=$('#correct').val();
            
