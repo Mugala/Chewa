@@ -12,7 +12,7 @@ class Profile (models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
     total_score = models.IntegerField(default=0)
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    user=models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

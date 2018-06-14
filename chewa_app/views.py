@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
 from .models import Language,Lesson,Level,Content,Profile,Score
-from .forms import ProfileDetails,LanguageDetails,LessonDetails
+from .forms import ProfileDetails,LanguageDetails,LessonDetails, EditProfile
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import LessonSerializer
@@ -41,6 +41,33 @@ def profile(request):
         form = ProfileDetails()
 
     return render(request, 'dashboard/profile.html', {"form":form})
+
+@login_required
+def edit_profile(request):
+    current_user=request.user
+    try:
+        profile=Profile.objects.get(user=request.user)
+    
+    except profile.DoesNotExist:
+        profile =Profile(user=request.user)
+        current_user=request.user
+    if request.method=='POST':
+        form=EditProfile(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            profile=form.save(commit=False)
+            profile.user=current_user
+            profile.save()
+            return redirect('view_profile')
+    else:
+        form=EditProfile(instance=profile)
+    return render(request, 'dashboard/edit_profile.html', {"form":form})
+
+def view_profile(request):
+    title="Chewa | Profile"
+    current_user=request.user
+    profile=Profile.objects.get(user=current_user)
+
+    return render(request, 'user/view_profile.html' , {"profile":profile})
 
 @login_required
 def language (request):

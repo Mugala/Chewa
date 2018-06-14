@@ -20,3 +20,8 @@ class LanguageDetails (forms.ModelForm):
     class Meta:
         model = Language
         fields = ['name', ]
+
+class EditProfile(forms.ModelForm):
+    class Meta:
+        model= Profile
+        fields=['name', 'email']
