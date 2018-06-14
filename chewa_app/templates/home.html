@@ -1,0 +1,27 @@
+{% extends 'dashboard/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
+{% block styles %}
+{% bootstrap_css %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{%endblock %}
+{% block content %}
+{{block.super}}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Hey {{user.username}}</h2>
+                <h3>Choose a language to learn</h3>
+                {% for language in languages %}
+                <form action="{% url 'level' language.name %}">
+                    <input method='get' type="submit" value="{{language.name}}", name="language">
+                </form>
+                
+                {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
