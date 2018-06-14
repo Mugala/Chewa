@@ -77,7 +77,7 @@ def level(request, language):
     print(language)
    
 
-    return render(request, 'level.html', {"levels":levels, "language":language})
+    return render(request, 'user/level.html', {"levels":levels, "language":language})
 
 def content(request, language, level):
     current_user=request.user
@@ -98,7 +98,7 @@ def content(request, language, level):
     print(contents)
     chosen=random.choice(contents)
     
-    return render(request, 'content.html', {"contents":chosen, "profile":profile})
+    return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
 
 def answer(request):
     current_user=request.user

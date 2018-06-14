@@ -1,0 +1,82 @@
+{% extends 'dashboard/base.html'%}
+{% load static %}
+{% block content %}
+{{block.super}}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+                <p>Username:{{profile.name}}</p>
+                <div id="total_score">
+                        <p>Your total_score : {{ profile.total_score}}</p>
+                </div>
+                
+            <h4>You are currently learning:{{contents.language}} </h4>
+            
+            <h1>Question: {{contents.question }}</h1>
+            <form id="get_answer" action="{% url 'answer' %}">
+                <input type="radio" name="{{contents.content}}" value="{{contents.answer}}" id="correct"> {{contents.answer}}<br>
+                <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"checked> {{contents.choice1}}<br>
+                <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"> {{contents.choice1}} <br>
+                <input type="submit">
+              </form>
+              <div id="response">
+                should appear here
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+     $(document).ready(function(){
+        alert("hellp");
+        $("form").submit(function(event){
+            event.preventDefault();
+            var url = document.getElementById('get_answer').getAttribute('action');
+            // var {{contents.content}}= document.getElementsByTagName('input').val()
+            console.log(url)
+            form=$('form')           
+            answer=$('input[name={{contents.content}}]:checked').val();
+            correct=$('#correct').val();
+           
+            if(answer==correct){
+                $.ajax({
+                    'url':url,
+                    'type':'POST',
+                    'data':$(this).serialize(),
+                    'dataType':'json',
+                    'success': function(response){
+                    $("#total_score").html(`<p>Your total_score : ${ response.total_score}</p>`);
+                    $("#response").html(`<h5 style="color:green;">Correct!</h5>`)
+                        
+                    },
+                    })              
+            }
+            else{
+                $("#response").html(`<h5 style="color:red;">Wrong. Try again!</h5>`)
+                form[0].reset();
+            }
+           
+        
+        })
+    });
+       
+   
+</script>
+
+
+{% block scripts %}
+{{block.super}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type='text/javascript' src="{% static 'js/scripts.js'%}"></script>
+
+{% endblock %}
+
+
+{% endblock %}
+
+if(answer===""){
+    $("#response").html(`<h5 style="color:red;">Please key in value</h5>`)
+}
