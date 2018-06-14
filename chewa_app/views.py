@@ -17,15 +17,16 @@ import random
 from django.forms.models import model_to_dict
 
 
-
-
+@login_required
 def home_page(request):
+    current_user=request.user
+   
     languages=Language.objects.all()
+      
     
-
-
     return render(request, 'home.html', {"languages":languages})
 
+@login_required
 def profile(request):
     current_user = request.user
     if request.method == 'POST':
@@ -41,6 +42,7 @@ def profile(request):
 
     return render(request, 'dashboard/profile.html', {"form":form})
 
+@login_required
 def language (request):
     current_user = request.user
     if request.method == 'POST':
@@ -56,6 +58,7 @@ def language (request):
 
     return render(request, 'dashboard/language.html', {"language_form":language_form})
 
+@login_required
 def lesson (request):
     current_user = request.user
     if request.method == 'POST':
@@ -71,6 +74,7 @@ def lesson (request):
 
     return render(request, 'dashboard/Lesson_details.html', {"lesson_form":lesson_form})
 
+@login_required
 def level(request, language):
     language=request.GET.get('language')
     levels=Level.objects.all()
@@ -79,34 +83,38 @@ def level(request, language):
 
     return render(request, 'user/level.html', {"levels":levels, "language":language})
 
+@login_required
 def content(request, language, level):
     current_user=request.user
-    profile=Profile.objects.get(user=current_user)
-    print(profile)
-    language=request.GET.get('language')
-    print(language)
-    currentUrl = request.get_full_path()
-    lan=currentUrl.split('/')
-    
-    language=lan[1]
-    print(language)
-    print(currentUrl)
-    level=request.GET.get('level')
-    print("here" + level)
-    
-    contents=Lesson.objects.filter(level__level=level, language__name=language)
-    print(contents)
-    chosen=random.choice(contents)
-    
+    try:
+        current_user=request.user    
+        profile=Profile.objects.get(user=current_user)
+        print(profile)
+        language=request.GET.get('language')
+        print(language)
+        currentUrl = request.get_full_path()
+        lan=currentUrl.split('/')
+        
+        language=lan[1]
+        print(language)
+        print(currentUrl)
+        level=request.GET.get('level')
+        print("here" + level)
+        
+        contents=Lesson.objects.filter(level__level=level, language__name=language)
+        print(contents)
+        chosen=random.choice(contents)  
+    except:
+        return redirect('profile')   
+   
     return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
-
+    
+@login_required
 def answer(request, point):
     current_user=request.user
     point=request.GET.get('point')
-    print(point)
     currentUrl = request.get_full_path()
     point=currentUrl.split('/')
-    print(point)
     profile=Profile.objects.get(user=current_user)
     profile.total_score+=int(point[-1])
     profile.save()
@@ -208,7 +216,7 @@ def sign_up(request):
             raw_password=form.cleaned_data.get('password1')
             user=authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home_page')
+            return redirect('profile')
     else:form=UserCreationForm()
     return render(request, 'registration/sign_up.html', {"form":form, "title":title})
             
