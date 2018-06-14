@@ -16,6 +16,7 @@
                 </div>
                 
             <h4>You are currently learning:{{contents.language}} </h4>
+            <p>This question has {{contents.score}} points</p>
                 
             <h1>Question: {{contents.question }}</h1>
             <form id="get_answer" action="{% url 'answer' contents.score %}" name='point'>
