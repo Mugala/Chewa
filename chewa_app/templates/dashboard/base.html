@@ -1,19 +1,21 @@
+
 {% load bootstrap3 %} {% load static %}
 
 <!DOCTYPE html>
 <html>
 
 <head>
-  <meta charset="utf-8"> {% if title %}
-  <title>Chewa - {{title}}</title>
-  {% else %}
-  <title> Chewa </title>
-  {% endif %}
-  {% block styles %}
+  <meta charset="utf-8"> 
   <link stylesheet="{% static 'css/main.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  {% bootstrap_css %}
+  <link rel="stylesheet" href="{%  static 'js/jquery-3.3.1.js' %}">
+  <link type="text/javascript" rel="stylesheet" href="{%   static 'js/scripts.js '%}">
+  {% if title %}
+  <title>Chewa - {{title}}</title>
+  {% else %}
+  <title> Chewa </title>
+  {% endif %} {% block styles %} {% bootstrap_css %}
   {% endblock %}
 
 
