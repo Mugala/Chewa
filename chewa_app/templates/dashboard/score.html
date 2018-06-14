@@ -16,7 +16,7 @@
 
     <div class="row">
       {% if answers%}
-        <h2>Found {{ answers|length }} of searched term {{message}}</h2>
+        <h2>Found {{ answers|length }} translations for the word {{message}}</h2>
       {% else %}
         <h2> No answers for the search term {{message}}</h2>
       {% endif %}
@@ -28,8 +28,8 @@
     {% if answers %}
       {% for answer in answers %}
         <div class="col-md-4">
-            <h1>{{answer.question}}</h1>
-            <!-- <img src="{{image.post_image.url}}" class="img-responsive" alt="Image" style="width: 500px; height: 250px;"> -->
+            <h1>{{answer.language}} - {{answer.answer}}</h1>
+           
         </div>
       {% endfor %}
     {% endif %}

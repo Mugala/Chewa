@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
-from .models import Language,Lesson,Level,Content,Profile,Score
+from .models import Language,Lesson,Level,Content,Profile,Score,Question
 from .forms import ProfileDetails,LanguageDetails,LessonDetails
 from rest_framework.response import Response
 from rest_framework.views import APIView
