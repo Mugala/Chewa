@@ -20,6 +20,7 @@ urlpatterns = [
     path('settings/', views.settings, name='settings'),
     path('settings/password/', views.password, name='password'),
     path('signup/', views.sign_up, name='sign_up'),
+    path('search/', views.search_results, name='search_results'),
 ]
 
 if settings.DEBUG:

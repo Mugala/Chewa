@@ -211,5 +211,22 @@ def sign_up(request):
             return redirect('home_page')
     else:form=UserCreationForm()
     return render(request, 'registration/sign_up.html', {"form":form, "title":title})
+
+
+
+def search_results(request):
+
+    if 'answer' in request.GET and request.GET["answer"]:
+        search_term = request.GET.get("answer")
+        searched_answers_by_question = Lesson.search_answers(search_term)
+        results = [*searched_answers_by_question]
+        message = f"{search_term}"
+
+        return render(request, 'dashboard/score.html',{"message":message,"answers": results})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'dashboard/score.html',{"message":message})
+            
             
 
