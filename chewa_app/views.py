@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
 from .models import Language,Lesson,Level,Content,Profile,Score
 from .forms import ProfileDetails,LanguageDetails,LessonDetails
 from rest_framework.response import Response
@@ -14,6 +14,7 @@ from django.contrib import messages
 from social_django.models import UserSocialAuth
 from django.urls import resolve
 import random
+from django.forms.models import model_to_dict
 
 
 
@@ -79,6 +80,9 @@ def level(request, language):
     return render(request, 'level.html', {"levels":levels, "language":language})
 
 def content(request, language, level):
+    current_user=request.user
+    profile=Profile.objects.get(user=current_user)
+    print(profile)
     language=request.GET.get('language')
     print(language)
     currentUrl = request.get_full_path()
@@ -94,7 +98,17 @@ def content(request, language, level):
     print(contents)
     chosen=random.choice(contents)
     
-    return render(request, 'content.html', {"contents":chosen})
+    return render(request, 'content.html', {"contents":chosen, "profile":profile})
+
+def answer(request):
+    current_user=request.user
+    profile=Profile.objects.get(user=current_user)
+    profile.total_score+=1
+    profile.save()
+
+    print(profile)
+
+    return JsonResponse(model_to_dict(profile), safe=False)
 
 
 class LessonList(APIView):

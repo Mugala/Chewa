@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime as dt
 from django import forms
+from django.core.validators import MaxValueValidator, MinLengthValidator, MinValueValidator
+
 
 
 # Create your models here.
@@ -9,7 +11,8 @@ from django import forms
 class Profile (models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
-    score = models.ManyToManyField(User, blank=True)
+    total_score = models.IntegerField(default=0)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -89,7 +92,7 @@ class Lesson (models.Model):
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to = 'chewa_img/',null=True)
-    score = models.ManyToManyField(User, related_name='answer_score', blank=True)
+    score = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
 
     def __str__(self):
         return self.question
