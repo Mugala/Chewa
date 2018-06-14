@@ -13,7 +13,7 @@ urlpatterns = [
     path('lesson/', views.lesson, name='lesson'),
     path('<language>/level/', views.level, name='level'),
     path('<language>/<level>/lesson', views.content, name='content'),
-    path('answer/', views.answer, name='answer'),
+    path('/answer/<point>', views.answer, name='answer'),
     path('api/lessons', views.LessonList.as_view()),
     path('settings/', views.settings, name='settings'),
     path('settings/password/', views.password, name='password'),

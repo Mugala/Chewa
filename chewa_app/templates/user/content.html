@@ -18,7 +18,7 @@
             <h4>You are currently learning:{{contents.language}} </h4>
                 
             <h1>Question: {{contents.question }}</h1>
-            <form id="get_answer" action="{% url 'answer' %}">
+            <form id="get_answer" action="{% url 'answer' contents.score %}" name='point'>
                 <input type="radio" name="{{contents.content}}" value="{{contents.answer}}" id="correct"> {{contents.answer}}<br>
                 <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"checked> {{contents.choice1}}<br>
                 <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"> {{contents.choice1}} <br>

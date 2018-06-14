@@ -100,10 +100,15 @@ def content(request, language, level):
     
     return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
 
-def answer(request):
+def answer(request, point):
     current_user=request.user
+    point=request.GET.get('point')
+    print(point)
+    currentUrl = request.get_full_path()
+    point=currentUrl.split('/')
+    print(point)
     profile=Profile.objects.get(user=current_user)
-    profile.total_score+=1
+    profile.total_score+=int(point[-1])
     profile.save()
 
     print(profile)
