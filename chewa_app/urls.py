@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from rest_framework.authtoken.views import obtain_auth_token
 
 
+#please do not change the urls.please and thanks*/
 
 urlpatterns = [
     path('', views.home_page, name='home_page'),
