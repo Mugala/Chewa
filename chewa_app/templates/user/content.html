@@ -27,6 +27,10 @@
               <div id="response">
                 
                 </div>
+                <button id="reveal_answer" >Show answer</button>
+                <div class="show_answer">
+                    {{contents.answer}}
+                </div>
                 <form action="{% url 'content' language=contents.language level=contents.level %}">
                         <input type="hidden" method='get' type="submit" value="{{contents.level}}", name="level">
                         <button>Next Question</button>
@@ -41,6 +45,11 @@
 
 <script>
      $(document).ready(function(){
+         /*hide and show answer*/
+         $('.show_answer').hide()
+         $('#reveal_answer').click(function(){
+            $('.show_answer').toggle()
+         })
         $("#get_answer").submit(function(event){
             event.preventDefault();
             var url = document.getElementById('get_answer').getAttribute('action');
