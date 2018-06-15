@@ -17,6 +17,9 @@ from django.forms.models import model_to_dict
 import random
 from django.forms.models import model_to_dict
 
+def landing_page(request):
+
+    return render(request,'landing_page.html')
 
 
 @login_required
@@ -25,6 +28,12 @@ def home_page(request):
     languages=Language.objects.all()
 
     return render(request, 'home.html', {"languages":languages})
+
+
+def swahili_beginning(request):
+
+    return render(request, 'beginner/kiswahili.html')
+
 
 @login_required
 def profile(request):
@@ -182,10 +191,38 @@ def content(request, language, level):
         print(contents)
         chosen=random.choice(contents)
     except:
-        return redirect('profile')
+        return redirect('content')
 
     return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
 
+@login_required
+def content2(request, language, level, lesson):
+    current_user=request.user
+    try:
+        current_user=request.user
+        profile=Profile.objects.get(user=current_user)
+        print(profile)
+        language=request.GET.get('language')
+        print(language)
+        currentUrl = request.get_full_path()
+        lan=currentUrl.split('/')
+
+        language=lan[1]
+        print(language)
+        print(currentUrl)
+        level=request.GET.get('level')
+        print("here" + level)
+
+        lesson=request.GET.get('lesson')
+        print(currentUrl)
+
+        contents=Lesson.objects.filter(level__level=level, language__name=language,lesson__question=lesson)
+        print(contents)
+        chosen=random.choice(contents)
+    except:
+        return redirect('content')
+
+    return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
 @login_required
 def answer(request, point):
     current_user=request.user

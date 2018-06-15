@@ -1,6 +1,12 @@
 #image{
   height:1vh;
 }
-*{
+.jumbotron{
+  background-image: url('/media/homepage.jpg');
+  background-size: cover;
 
+}
+input[value=text] {
+    width: 100px;
+    transition: ease-in-out, width .35s ease-in-out;
 }

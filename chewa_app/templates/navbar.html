@@ -4,15 +4,37 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-inverse">
+<!-- <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'home_page' %}">Chewa Application</a>
-      <a class="navbar-brand" href="{% url 'question' %}">Add a Question</a>
+
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+          </ul>
+        </div>
+
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'home_page' %}">Chewa</a>
+          <a class="navbar-brand" href="{% url 'swa-begin' %}">swahili</a>
+        </div>
+        <a href="{% url 'view_profile'%}">Profile</a>
+              {% if user.is_authenticated%}
+              <a href="{% url 'logout'%}">Logout</a>
+              {% else %}
+              <a href="{% url 'login'%}">Login</a>
+              {% endif %}
+
+
+
     </div>
-    <!-- Adding a search form  -->
+
     <div class="col-sm-4 col-md-4 navbar-right">
 
         <form class="navbar-form" role="search" action="{% url 'search_results' %}">
@@ -26,8 +48,59 @@
 
         </form>
       </div>
-      <!-- search form end -->
+
   </div>
+-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'home_page'%}" style="color:#82cadf;font-size:2em;">CHEWA</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+    <ul class="navbar-nav mr-auto" style="font-size:180%;font-family: 'Quicksand', sans-serif;">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Classes
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'swa-begin' %}">Beginner-Swahili</a>
+
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+
+      {% if user.is_authenticated%}
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'logout'%}">Logout</a>
+      </li>
+
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'login'%}">Login</a>
+      </li>
+
+      {% endif %}
+
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_results' %}">
+
+      <input class="form-control mr-sm-2" type="search" placeholder="Translator" aria-label="Search" name="answer"  >
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="glyphicon glyphicon-search"></i>Search</i></button>
+    </form>
+  </div>
+
 </nav>
 </body>
 </html>

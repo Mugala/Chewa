@@ -14,10 +14,10 @@
                 <div id="total_score">
                         <p>Your total_score : {{ profile.total_score}}</p>
                 </div>
-                
+
             <h4>You are currently learning:{{contents.language}} </h4>
             <p>This question has {{contents.score}} points</p>
-                
+
             <h1>Question: {{contents.question }}</h1>
             <form id="get_answer" action="{% url 'answer' contents.score %}">
                 <input type="radio" name="{{contents.content}}" value="{{contents.answer}}" id="correct"> {{contents.answer}}<br>
@@ -26,7 +26,7 @@
                 <input type="submit">
               </form>
               <div id="response">
-                
+
                 </div>
                 <button id="reveal_answer" >Show answer</button>
                 <div class="show_answer">
@@ -36,8 +36,8 @@
                         <input type="hidden" method='get' type="submit" value="{{contents.level}}", name="level">
                         <button class="btn btn-info">Next Question</button>
                     </form>
-                
-                
+
+
         </div>
     </div>
 </div>
@@ -56,10 +56,10 @@
             var url = document.getElementById('get_answer').getAttribute('action');
             // var {{contents.content}}= document.getElementsByTagName('input').val()
             console.log(url)
-            form=$('#get_answer')           
+            form=$('#get_answer')
             answer=$('input[name={{contents.content}}]:checked').val();
             correct=$('#correct').val();
-           
+
             if(answer==correct){
                 $.ajax({
                     'url':url,
@@ -69,20 +69,20 @@
                     'success': function(response){
                     $("#total_score").html(`<p>Your total_score : ${ response.total_score}</p>`);
                     $("#response").html(`<h5 style="color:green;">Correct!</h5>`)
-                        
+
                     },
-                    })              
+                    })
             }
             else{
                 $("#response").html(`<h5 style="color:red;">Wrong. Try again!</h5>`)
                 form[0].reset();
             }
-           
-        
+
+
         })
     });
-       
-   
+
+
 </script>
 
 
