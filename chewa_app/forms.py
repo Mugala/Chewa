@@ -1,5 +1,5 @@
 from django import forms
-from .models import Language,Profile,Level,Lesson,Content,Answers
+from .models import Language,Profile,Level,Lesson,Content,Answers,Question
 
 
 class ProfileDetails (forms.ModelForm):
@@ -27,3 +27,9 @@ class AnswersDetails (forms.ModelForm):
 
         model = Answers
         fields =['answer','image']
+
+class QuestionDetails (forms.ModelForm):
+    class Meta:
+
+        model = Question
+        fields =['question']
