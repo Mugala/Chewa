@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import django_heroku
-from decouple import config
-
+# import django_heroku
+# from decouple import config
+#
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,11 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = config('SECRET_KEY')
 
 # # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
-
+# DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = 'zrp$om(7lb#o2t9%h7wldss5l$m79pq103wswzx_0e6%3!z#d_'
+DEBUG = True
 ALLOWED_HOSTS = []
 
 
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'rest_framework',
     'rest_framework.authtoken',
-    'social_django', 
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -80,12 +81,12 @@ TEMPLATES = [
 ]
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',
-    'social_core.backends.google.GoogleOpenId', 
-    'social_core.backends.google.GoogleOAuth2',  
-    'social_core.backends.github.GithubOAuth2', 
-    'social_core.backends.facebook.FacebookOAuth2', 
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
-    
+
 
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -103,7 +104,7 @@ SOCIAL_AUTH_TWITTER_KEY ='HAKS2NgyzI0kYqWlzXzvI3bBL'
 SOCIAL_AUTH_TWITTER_SECRET='WlP0htHLGRR2DV8NU911RgBSCy9q9aHmcduIaVlafLEI5DOJem'
 
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='141602475848-8jpmih1ord76vca9mp1r6kegrvi0ibn8.apps.googleusercontent.com' 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='141602475848-8jpmih1ord76vca9mp1r6kegrvi0ibn8.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'LwzM2v-yrM7VAbKEw_9yaFtS' #Paste Secret Key
 
 request_token_url = 'https://api.twitter.com/oauth/request_token'
@@ -125,8 +126,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'chewa',
-        'USER': 'levi',
-        'PASSWORD': 'eyeshadow',
+        'USER': 'lulumutuli',
+        'PASSWORD': 'lulu',
     }
 }
 
@@ -176,8 +177,6 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-<<<<<<< HEAD
 
-django_heroku.settings(locals())
-=======
->>>>>>> 9df82bad304dd646b61fefce126ca88ad8c5fc3f
+
+# django_heroku.settings(locals())
