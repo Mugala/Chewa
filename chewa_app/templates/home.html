@@ -10,7 +10,20 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
+            <hr>
+            <h3>Translator</h3>
+            <form action="">
+                    <input type="text" placeholder="Word to be translated">
+                    <input list="languages">
+                    <datalist id="languages">
+                        {% for language in languages %}
+                        <option value="{{language.name}}">
+                        {%endfor%}
+                    </datalist>
+                </form>
+            <hr>
             <h1>Hey {{user.username}}</h2>
+                
                 <h3>Choose a language to learn</h3>
                 {% for language in languages %}
                 <form action="{% url 'level' language.name %}">
