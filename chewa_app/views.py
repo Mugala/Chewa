@@ -80,7 +80,8 @@ def edit_profile(request):
     else:
         form=EditProfile(instance=profile)
     return render(request, 'dashboard/edit_profile.html', {"form":form})
-
+    
+@login_required
 def view_profile(request):
     title="Chewa | Profile"
     current_user=request.user
