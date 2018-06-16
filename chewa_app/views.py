@@ -13,7 +13,6 @@ from django.contrib.auth import update_session_auth_hash, login, authenticate, l
 from django.contrib import messages
 from social_django.models import UserSocialAuth
 from django.urls import resolve
-from django.forms.models import model_to_dict
 import random
 from django.forms.models import model_to_dict
 
