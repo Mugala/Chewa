@@ -20,7 +20,6 @@ from django.forms.models import model_to_dict
 @login_required
 def home_page(request):
     current_user=request.user
-   
     languages=Language.objects.all()
       
     
@@ -32,11 +31,14 @@ def translator(request):
     '''
     if 'translator' in request.GET and request.GET['translator']:
         search_term=request.GET.get('translator')
+        search_language=request.GET.get('language')
+        print(search_language)
         print(search_term)
-        translate_word=Lesson.search_word(search_term)
+        translate_word=Lesson.objects.filter(language__name=search_language, question__icontains=search_term)
+        print(translate_word)
         message=f'{search_term}'
 
-        return render(request, 'user/translator.html', {"message":message, "words":translate_word})
+        return render(request, 'user/translator.html', {"message":message, "words":translate_word, 'language':search_language})
     else:
         title="Translate "
         message="Nothing found sorry"
