@@ -150,10 +150,13 @@ def content(request, language, level):
         contents=Lesson.objects.filter(level__level=level, language__name=language)
         print(contents)
         chosen=random.choice(contents)  
+        return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
     except:
-        return redirect('profile')   
+        current_user=request.user    
+        profile=Profile.objects.get(user=current_user)
+        message="There are no questions at the moment"
    
-    return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
+    return render(request, 'user/content.html', {"profile":profile, "message":message})
     
 @login_required
 def answer(request, point):

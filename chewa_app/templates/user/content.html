@@ -10,7 +10,9 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-8 col-xs-offset-2">
+
                 <p>Username:{{profile.name}}</p>
+            {% if contents%}
                 <div id="total_score">
                         <p>Your total_score : {{ profile.total_score}}</p>
                 </div>
@@ -36,6 +38,9 @@
                         <input type="hidden" method='get' type="submit" value="{{contents.level}}", name="level">
                         <button class="btn btn-info">Next Question</button>
                     </form>
+                    {% else %}
+                    {{message}}
+                    {% endif %}
                 
                 
         </div>
