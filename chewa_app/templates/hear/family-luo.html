@@ -1,0 +1,27 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<p style="font-family: 'Quicksand', sans-serif;font-size:340%;color:#82cadf;margin-left:1em;margin-top:2.5em;">Let's hear how it sounds.....</p>
+
+
+<div class="container" style="font-family: 'Quicksand', sans-serif;color:#3a97a5;text-align:center;margin-left:1%;">
+{% for one_lesson_item in one_lesson %}
+
+<div class="card" style="width: 33rem;font-size:110%;float:left;margin-left:2%;margin-top:2%;">
+  <div class="card-body">
+    <img src="/media/{{one_lesson_item.image}}" style="height:34vh;margin-left:8%;">
+
+    <h2>{{one_lesson_item.answer}}</h2>
+
+    <audio controls>
+        <source src="/media/{{ one_lesson_item.audio }}" type="audio/mpeg">
+    </audio>
+
+  </div>
+</div>
+
+
+{% endfor %}
+</div>
+<a href="{% url 'luo_family'%}">
+<span class="glyphicon glyphicon-menu-right" style="font-size:5em;color:#82cadf;margin-top:-0.2em;margin-bottom:-6em;margin-left:80%;height:5em;"></span></a>
+{% endblock %}

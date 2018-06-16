@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12 col-md-6" style="font-family: 'Quicksand', sans-serif;color:#3a97a5;font-size:157%;">
         <h2 class="text-center">Login</h2>
         <hr>
         <form method="post">
@@ -15,14 +15,14 @@
         </form>
         <br>
         <p>No account? Sign up <a href="{% url 'sign_up' %}">here</a>
-        </p>  
+        </p>
     </div>
-    <div class="col-xs-12 col-md-6 text-center">
+    <div class="col-xs-12 col-md-6 text-center" style="font-family: 'Quicksand', sans-serif;color:#3a97a5;">
       <h2>Social Login</h2>
       <hr>
       <br>
       <div id="google"class='text-center'>
-         
+
         <form action="{% url 'social:begin' 'google-oauth2' %}">
             {% csrf_token %}
             <img src="https://fthmb.tqn.com/IH_l1QnIcFddCFuviMJ7UuRJfko=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/google-plus-57d9e4d53df78c9cceedc5e1.png" alt="" style="width:6%; display:inline-block" class="img-responsive" >
@@ -32,7 +32,7 @@
       <br>
       <!--Twitter-->
       <div id="twitter"class='text-center'>
-         
+
           <form action="{% url 'social:begin' 'twitter' %}">
               {% csrf_token %}
               <img src="http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c53e.png" alt="" style="width:7%; display:inline-block" class="img-responsive" >
@@ -42,5 +42,5 @@
     </div>
   </div>
 </div>
-  
+
 {% endblock %}

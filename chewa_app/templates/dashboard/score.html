@@ -1,18 +1,16 @@
 {% extends 'dashboard/base.html'%}
 {% load static %}
 {% block content %}
-<div class="container">
+<div class="container" style="font-family: 'Quicksand', sans-serif;color:#3a97a5;font-size:150%;">
     <div class="row">
         <div class="col-xs-12">
             <h1>Translator</h1>
             <hr>
-            <!-- here{{scores.score.count}} -->
-            Your score is: {{scores}}
-            
+
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container" style="font-family: 'Quicksand', sans-serif;color:#3a97a5;font-size:150%;">
 
     <div class="row">
       {% if answers%}
@@ -20,16 +18,16 @@
       {% else %}
         <h2> No answers for the search term {{message}}</h2>
       {% endif %}
-  
+
     </div>
-  
+
     <div class="row">
-  
+
     {% if answers %}
       {% for answer in answers %}
         <div class="col-md-4">
-            <h1>{{answer.language}} - {{answer.answer}}</h1>
-           
+          <span style="color:black;">  <h1>{{answer.language}} - {{answer.answer}}</span></h1>
+
         </div>
       {% endfor %}
     {% endif %}

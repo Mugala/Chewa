@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
-from .models import Language,Lesson,Level,Content,Profile,Score,Question
+from .models import Language,Lesson,Level,Content,Profile,Score,Question,Answers
 from .forms import ProfileDetails,LanguageDetails,LessonDetails,AnswersDetails,QuestionDetails,EditProfile
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -188,6 +188,7 @@ def content(request, language, level):
         print("here" + level)
 
         contents=Lesson.objects.filter(level__level=level, language__name=language)
+
         print(contents)
         chosen=random.choice(contents)
     except:
@@ -195,34 +196,6 @@ def content(request, language, level):
 
     return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
 
-@login_required
-def content2(request, language, level, lesson):
-    current_user=request.user
-    try:
-        current_user=request.user
-        profile=Profile.objects.get(user=current_user)
-        print(profile)
-        language=request.GET.get('language')
-        print(language)
-        currentUrl = request.get_full_path()
-        lan=currentUrl.split('/')
-
-        language=lan[1]
-        print(language)
-        print(currentUrl)
-        level=request.GET.get('level')
-        print("here" + level)
-
-        lesson=request.GET.get('lesson')
-        print(currentUrl)
-
-        contents=Lesson.objects.filter(level__level=level, language__name=language,lesson__question=lesson)
-        print(contents)
-        chosen=random.choice(contents)
-    except:
-        return redirect('content')
-
-    return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
 @login_required
 def answer(request, point):
     current_user=request.user
@@ -360,3 +333,98 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'dashboard/score.html',{"message":message})
+
+def hear_it(request):
+
+    question= Answers.objects.all()
+    single_lesson = Lesson.objects.filter(language_id=1).all()
+
+    one_lesson= single_lesson.filter(content__category='Greetings')
+    one= one_lesson.order_by('?')[:1]
+    print(one)
+
+    return render(request, 'hear/kiswahili.html',{"single_lesson":single_lesson,"one_lesson":one_lesson,"one":one})
+
+def swa_family(request):
+    return render(request, 'beginner/family-swa.html')
+
+def swa_family_audio(request):
+
+
+    question= Answers.objects.all()
+    single_lesson = Lesson.objects.filter(language_id=1).all()
+
+    one_lesson= single_lesson.filter(content__category='Family')
+    one= one_lesson.order_by('?')[:1]
+    print(one)
+
+    return render(request, 'hear/family-swa.html',{"one_lesson":one_lesson})
+
+def kikuyu_family(request):
+    return render(request, 'beginner/family-kikuyu.html')
+
+
+def kikuyu_beginning(request):
+
+    return render(request, 'beginner/kikuyu.html')
+
+def kikuyu_hear_it(request):
+
+    question= Answers.objects.all()
+    single_lesson = Lesson.objects.filter(language_id=2).all()
+
+    one_lesson= single_lesson.filter(content__category='Greetings')
+    one= one_lesson.order_by('?')[:1]
+    print(one)
+
+    return render(request, 'hear/kiswahili.html',{"single_lesson":single_lesson,"one_lesson":one_lesson,"one":one})
+
+
+def kikuyu_family_audio(request):
+
+
+    question= Answers.objects.all()
+    single_lesson = Lesson.objects.filter(language_id=2).all()
+
+    one_lesson= single_lesson.filter(content__category='Family')
+    one= one_lesson.order_by('?')[:1]
+    print(one)
+
+    return render(request, 'hear/family-swa.html',{"one_lesson":one_lesson})
+
+
+def kikuyu_beginning(request):
+
+    return render(request, 'beginner/kikuyu.html')
+
+def luo_family(request):
+    return render(request, 'beginner/family-luo.html')
+
+
+def luo_beginning(request):
+
+    return render(request, 'beginner/luo.html')
+
+def luo_hear_it(request):
+
+    question= Answers.objects.all()
+    single_lesson = Lesson.objects.filter(language_id=3).all()
+
+    one_lesson= single_lesson.filter(content__category='Greetings')
+    one= one_lesson.order_by('?')[:1]
+    print(one)
+
+    return render(request, 'hear/luo.html',{"single_lesson":single_lesson,"one_lesson":one_lesson,"one":one})
+
+
+def luo_family_audio(request):
+
+
+    question= Answers.objects.all()
+    single_lesson = Lesson.objects.filter(language_id=3).all()
+
+    one_lesson= single_lesson.filter(content__category='Family')
+    one= one_lesson.order_by('?')[:1]
+    print(one)
+
+    return render(request, 'hear/family-luo.html',{"one_lesson":one_lesson})

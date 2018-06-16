@@ -7,6 +7,7 @@ from .models import Language,Profile,Level,Lesson,Content,Answers,Question
 class LessonsAdmin(admin.ModelAdmin):
     filter_horizontal = ('Language',)
 
+
 admin.site.register(Answers)
 admin.site.register(Question)
 admin.site.register(Language)

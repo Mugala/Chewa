@@ -44,7 +44,7 @@ class Language (models.Model):
     @classmethod
     def language (cls):
         language_details = cls.objects.all()
-        
+
 class Content (models.Model):
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     category = models.CharField(max_length=60)
@@ -70,6 +70,7 @@ class Content (models.Model):
 class Answers(models.Model):
     answer=models.CharField(max_length=100)
     image = models.ImageField(upload_to = 'chewa_img/',null=True)
+
 
     def __str__(self):
         return self.answer
@@ -102,11 +103,12 @@ class Lesson (models.Model):
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to = 'chewa_img/',null=True)
+    audio = models.FileField(null=True)
     score = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
 
     def __str__(self):
         return self.question.question
-    
+
 
     def save_Lesson(self):
         self.save()
@@ -130,8 +132,9 @@ class Lesson (models.Model):
         ans = cls.objects.filter(question__question__icontains=search_term)
         print(ans)
         return ans
-        
-        
+
+
+
 class Score (models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     score=models.IntegerField(default=0, null=True)
