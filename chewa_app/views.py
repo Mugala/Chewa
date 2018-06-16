@@ -26,6 +26,23 @@ def home_page(request):
     
     return render(request, 'home.html', {"languages":languages})
 
+def translator(request):
+    '''
+    function to translate words
+    '''
+    if 'translator' in request.GET and request.GET['translator']:
+        search_term=request.GET.get('translator')
+        print(search_term)
+        translate_word=Lesson.search_word(search_term)
+        message=f'{search_term}'
+
+        return render(request, 'user/translator.html', {"message":message, "words":translate_word})
+    else:
+        title="Translate "
+        message="Nothing found sorry"
+        return render(request, 'user/translator.html', {"message":message,"title":title})
+
+
 @login_required
 def profile(request):
     current_user = request.user

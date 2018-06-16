@@ -113,6 +113,10 @@ class Lesson (models.Model):
         single = cls.objects.filter(content__category__icontains=single_category)
         print(single)
         return single
+    @classmethod
+    def search_word(cls, search_term):
+        results=cls.objects.filter(question__icontains=search_term)
+        return results
 
 class Score (models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)

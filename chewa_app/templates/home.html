@@ -12,15 +12,17 @@
         <div class="col-xs-12">
             <hr>
             <h3>Translator</h3>
-            <form action="">
-                    <input type="text" placeholder="Word to be translated">
-                    <input list="languages">
+            <form action="{% url 'translate' %}" role='search'>
+                    <input type="text" method='get' placeholder="Input Word" name="translator">
+                    <input list="languages" placeholder="Choose Langauge" method='post'>
                     <datalist id="languages">
                         {% for language in languages %}
                         <option value="{{language.name}}">
                         {%endfor%}
                     </datalist>
+                <input type="submit" value="translate">
                 </form>
+           
             <hr>
             <h1>Hey {{user.username}}</h2>
                 

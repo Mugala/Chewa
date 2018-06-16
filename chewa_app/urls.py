@@ -10,6 +10,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path('', views.home_page, name='home_page'),
     path('profile/', views.profile, name='profile'),
+    path('translate/', views.translator, name='translate'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('profile/view', views.view_profile, name='view_profile'),
     path('language/', views.language, name='language'),
