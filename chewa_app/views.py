@@ -27,12 +27,27 @@ def home_page(request):
     current_user=request.user
     languages=Language.objects.all()
 
+
     return render(request, 'home.html', {"languages":languages})
 
+def translator(request):
+    '''
+    function to translate words
+    '''
+    if 'translator' in request.GET and request.GET['translator']:
+        search_term=request.GET.get('translator')
+        search_language=request.GET.get('language')
+        print(search_language)
+        print(search_term)
+        translate_word=Lesson.objects.filter(language__name=search_language, question__icontains=search_term)
+        print(translate_word)
+        message=f'{search_term}'
 
-def swahili_beginning(request):
-
-    return render(request, 'beginner/kiswahili.html')
+        return render(request, 'user/translator.html', {"message":message, "words":translate_word, 'language':search_language})
+    else:
+        title="Translate "
+        message="Nothing found sorry"
+        return render(request, 'user/translator.html', {"message":message,"title":title})
 
 
 @login_required
@@ -50,7 +65,6 @@ def profile(request):
         form = ProfileDetails()
 
     return render(request, 'dashboard/profile.html', {"form":form})
-
 
 @login_required
 def edit_profile(request):
@@ -72,29 +86,13 @@ def edit_profile(request):
         form=EditProfile(instance=profile)
     return render(request, 'dashboard/edit_profile.html', {"form":form})
 
-
+@login_required
 def view_profile(request):
     title="Chewa | Profile"
     current_user=request.user
     profile=Profile.objects.get(user=current_user)
 
     return render(request, 'user/view_profile.html' , {"profile":profile})
-
-
-def profile(request):
-    current_user = request.user
-    if request.method == 'POST':
-        form = ProfileDetails(request.POST, request.FILES)
-        if form.is_valid():
-            Profile = form.save(commit=False)
-            Profile.user = current_user
-            Profile.save()
-
-            return redirect("home_page")
-    else:
-        form = ProfileDetails()
-
-    return render(request, 'dashboard/profile.html', {"form":form})
 
 @login_required
 def language (request):
@@ -128,38 +126,6 @@ def lesson (request):
 
     return render(request, 'dashboard/Lesson_details.html', {"lesson_form":lesson_form})
 
-
-def question (request):
-    current_user = request.user
-    if request.method == 'POST':
-        form = QuestionDetails(request.POST, request.FILES)
-        if form.is_valid():
-            Question = form.save(commit=False)
-            Question.user = current_user
-            Question.save()
-
-            return redirect("answerform")
-    else:
-        question_form = QuestionDetails()
-
-    return render(request, 'dashboard/question.html', {"question_form":question_form})
-
-def answerform (request):
-    current_user = request.user
-    if request.method == 'POST':
-        form = AnswersDetails(request.POST, request.FILES)
-        if form.is_valid():
-            Answer = form.save(commit=False)
-            Answer.user = current_user
-            Answer.save()
-
-            return redirect("lesson")
-    else:
-        answer_form = AnswersDetails()
-
-    return render(request, 'dashboard/answer.html', {"answer_form":answer_form})
-
-
 @login_required
 def level(request, language):
     language=request.GET.get('language')
@@ -188,22 +154,22 @@ def content(request, language, level):
         print("here" + level)
 
         contents=Lesson.objects.filter(level__level=level, language__name=language)
-
         print(contents)
         chosen=random.choice(contents)
+        return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
     except:
-        return redirect('content')
+        current_user=request.user
+        profile=Profile.objects.get(user=current_user)
+        message="There are no questions at the moment"
 
-    return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
+    return render(request, 'user/content.html', {"profile":profile, "message":message})
 
 @login_required
 def answer(request, point):
     current_user=request.user
     point=request.GET.get('point')
-    print(point)
     currentUrl = request.get_full_path()
     point=currentUrl.split('/')
-    print(point)
     profile=Profile.objects.get(user=current_user)
     profile.total_score+=int(point[-1])
     profile.save()
@@ -315,7 +281,7 @@ def sign_up(request):
             raw_password=form.cleaned_data.get('password1')
             user=authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home_page')
+            return redirect('profile')
     else:form=UserCreationForm()
     return render(request, 'registration/sign_up.html', {"form":form, "title":title})
 
@@ -344,6 +310,11 @@ def hear_it(request):
     print(one)
 
     return render(request, 'hear/kiswahili.html',{"single_lesson":single_lesson,"one_lesson":one_lesson,"one":one})
+
+def swahili_beginning(request):
+
+    return render(request, 'beginner/kiswahili.html')
+
 
 def swa_family(request):
     return render(request, 'beginner/family-swa.html')

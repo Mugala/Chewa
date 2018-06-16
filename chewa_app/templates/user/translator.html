@@ -1,0 +1,33 @@
+{% extends 'dashboard/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
+{% block styles %}
+{% bootstrap_css %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{%endblock %}
+{% block content %}
+{{block.super}}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+                <div class="response">
+                        {% if words %}
+                            {%for word in words%}
+                            <h4> {{message}} in {{word.language.name}} is:
+                            {{word.answer}}</h4> 
+                            {%endfor%}
+                            {% else %}
+                            <h4>Nothing found for {{message}} in {{language}}</h4>
+                            {% endif %}
+                         </div> 
+               
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+

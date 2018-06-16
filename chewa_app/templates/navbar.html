@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -118,3 +119,25 @@
 </nav>
 </body>
 </html>
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Navbar</title>
+</head>
+<body>
+    <div class="navbar">
+            <ul>
+                    <li><a href="{% url 'home_page'%}">Home</a></li>
+                    <li><a href="{% url 'view_profile'%}">Profile</a></li>
+                    {% if user.is_authenticated%}
+                    <li><a href="{% url 'logout'%}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login'%}">Login</a></li>
+                    {% endif %}
+                </ul>
+    </div>
+    
+</body>
+</html>
+>>>>>>> 9e4e68da1c3407c9783de5c11aa041279c074d85

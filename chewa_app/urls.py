@@ -11,8 +11,9 @@ urlpatterns = [
     path('', views.landing_page, name='landing_page'),
     path('home/', views.home_page, name='home_page'),
     path('profile/', views.profile, name='profile'),
-    path('view-profile/', views.view_profile, name='view_profile'),
+    path('translate/', views.translator, name='translate'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('profile/view', views.view_profile, name='view_profile'),
     path('language/', views.language, name='language'),
     path('question/', views.question, name='question'),
     path('answerform/', views.answerform, name='answerform'),
@@ -21,7 +22,6 @@ urlpatterns = [
     path('lesson/', views.lesson, name='lesson'),
     path('<language>/level/', views.level, name='level'),
     path('<language>/<level>/lesson', views.content, name='content'),
-
     path('answer/<point>', views.answer, name='answer'),
     path('api/lessons', views.LessonList.as_view()),
     path('settings/', views.settings, name='settings'),

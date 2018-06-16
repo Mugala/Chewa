@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+<<<<<<< HEAD
 # import django_heroku
 # from decouple import config
 #
+=======
+import django_heroku
+>>>>>>> 9e4e68da1c3407c9783de5c11aa041279c074d85
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -92,7 +96,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/profile/'
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
 LOGIN_URL = 'login'
@@ -183,4 +187,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+<<<<<<< HEAD
 # django_heroku.settings(locals())
+=======
+django_heroku.settings(locals())
+>>>>>>> 9e4e68da1c3407c9783de5c11aa041279c074d85
