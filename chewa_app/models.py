@@ -12,7 +12,7 @@ class Profile (models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
     total_score = models.IntegerField(default=0)
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    user=models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -126,6 +126,10 @@ class Lesson (models.Model):
         single = cls.objects.filter(content__category__icontains=single)
         print(single)
         return single
+    @classmethod
+    def search_word(cls, search_term):
+        results=cls.objects.filter(question__icontains=search_term)
+        return results
 
     @classmethod
     def search_answers(cls,search_term):
