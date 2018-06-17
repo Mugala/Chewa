@@ -111,30 +111,10 @@
     <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_results' %}">
 
       <input class="form-control mr-sm-2" type="search" placeholder="Translator" aria-label="Search" name="answer"  >
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="glyphicon glyphicon-search"></i>Search</i></button>
+      <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="glyphicon glyphicon-search"></i>Search</i></button>
     </form>
   </div>
 
 </nav>
-</body>
-</html>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Navbar</title>
-</head>
-<body>
-    <div class="navbar">
-            <ul>
-                    <li><a href="{% url 'home_page'%}">Home</a></li>
-                    <li><a href="{% url 'view_profile'%}">Profile</a></li>
-                    {% if user.is_authenticated%}
-                    <li><a href="{% url 'logout'%}">Logout</a></li>
-                    {% else %}
-                    <li><a href="{% url 'login'%}">Login</a></li>
-                    {% endif %}
-                </ul>
-    </div>
-    
 </body>
 </html>

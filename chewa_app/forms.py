@@ -32,7 +32,8 @@ class EditProfile(forms.ModelForm):
     class Meta:
         model= Profile
         fields=['name', 'email']
-        
+
+
 class QuestionDetails (forms.ModelForm):
     class Meta:
 

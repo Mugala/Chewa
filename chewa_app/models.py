@@ -122,8 +122,8 @@ class Lesson (models.Model):
         return lesson_details
 
     @classmethod
-    def single(cls,single_category):
-        single = cls.objects.filter(content__category__icontains=single)
+    def single_lesson(cls,single_category):
+        single = cls.objects.filter(content__category__icontains=single_category)
         print(single)
         return single
     @classmethod

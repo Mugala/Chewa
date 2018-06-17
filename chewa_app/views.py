@@ -15,7 +15,6 @@ from django.contrib.auth import update_session_auth_hash, login, authenticate, l
 from django.contrib import messages
 from social_django.models import UserSocialAuth
 from django.urls import resolve
-from django.forms.models import model_to_dict
 import random
 from django.forms.models import model_to_dict
 
@@ -30,6 +29,8 @@ def home_page(request):
     languages=Language.objects.all()
       
     
+
+
     return render(request, 'home.html', {"languages":languages})
 
 def translator(request):
@@ -52,58 +53,6 @@ def translator(request):
         return render(request, 'user/translator.html', {"message":message,"title":title})
 
 
-
-def swahili_beginning(request):
-
-    return render(request, 'beginner/kiswahili.html')
-
-
-@login_required
-def profile(request):
-    current_user = request.user
-    if request.method == 'POST':
-        form = ProfileDetails(request.POST, request.FILES)
-        if form.is_valid():
-            Profile = form.save(commit=False)
-            Profile.user = current_user
-            Profile.save()
-
-            return redirect("home_page")
-    else:
-        form = ProfileDetails()
-
-    return render(request, 'dashboard/profile.html', {"form":form})
-
-
-@login_required
-def edit_profile(request):
-    current_user=request.user
-    try:
-        profile=Profile.objects.get(user=request.user)
-
-    except profile.DoesNotExist:
-        profile =Profile(user=request.user)
-        current_user=request.user
-    if request.method=='POST':
-        form=EditProfile(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            profile=form.save(commit=False)
-            profile.user=current_user
-            profile.save()
-            return redirect('view_profile')
-    else:
-        form=EditProfile(instance=profile)
-    return render(request, 'dashboard/edit_profile.html', {"form":form})
-
-
-def view_profile(request):
-    title="Chewa | Profile"
-    current_user=request.user
-    profile=Profile.objects.get(user=current_user)
-
-    return render(request, 'user/view_profile.html' , {"profile":profile})
-
-
 @login_required
 def profile(request):
     current_user = request.user
@@ -125,7 +74,7 @@ def edit_profile(request):
     current_user=request.user
     try:
         profile=Profile.objects.get(user=request.user)
-    
+
     except profile.DoesNotExist:
         profile =Profile(user=request.user)
         current_user=request.user
@@ -140,6 +89,7 @@ def edit_profile(request):
         form=EditProfile(instance=profile)
     return render(request, 'dashboard/edit_profile.html', {"form":form})
 
+@login_required
 def view_profile(request):
     title="Chewa | Profile"
     current_user=request.user
@@ -179,38 +129,6 @@ def lesson (request):
 
     return render(request, 'dashboard/Lesson_details.html', {"lesson_form":lesson_form})
 
-
-def question (request):
-    current_user = request.user
-    if request.method == 'POST':
-        form = QuestionDetails(request.POST, request.FILES)
-        if form.is_valid():
-            Question = form.save(commit=False)
-            Question.user = current_user
-            Question.save()
-
-            return redirect("answerform")
-    else:
-        question_form = QuestionDetails()
-
-    return render(request, 'dashboard/question.html', {"question_form":question_form})
-
-def answerform (request):
-    current_user = request.user
-    if request.method == 'POST':
-        form = AnswersDetails(request.POST, request.FILES)
-        if form.is_valid():
-            Answer = form.save(commit=False)
-            Answer.user = current_user
-            Answer.save()
-
-            return redirect("lesson")
-    else:
-        answer_form = AnswersDetails()
-
-    return render(request, 'dashboard/answer.html', {"answer_form":answer_form})
-
-
 @login_required
 def level(request, language):
     language=request.GET.get('language')
@@ -224,31 +142,29 @@ def level(request, language):
 def content(request, language, level):
     current_user=request.user
     try:
-        current_user=request.user    
+        current_user=request.user
         profile=Profile.objects.get(user=current_user)
         print(profile)
         language=request.GET.get('language')
         print(language)
         currentUrl = request.get_full_path()
         lan=currentUrl.split('/')
-        
         language=lan[1]
         print(language)
         print(currentUrl)
         level=request.GET.get('level')
         print("here" + level)
-        
         contents=Lesson.objects.filter(level__level=level, language__name=language)
         print(contents)
-        chosen=random.choice(contents)  
+        chosen=random.choice(contents)
         return render(request, 'user/content.html', {"contents":chosen, "profile":profile})
     except:
-        current_user=request.user    
+        current_user=request.user
         profile=Profile.objects.get(user=current_user)
         message="There are no questions at the moment"
-   
+
     return render(request, 'user/content.html', {"profile":profile, "message":message})
-    
+
 @login_required
 def answer(request, point):
     current_user=request.user
@@ -395,6 +311,11 @@ def hear_it(request):
     print(one)
 
     return render(request, 'hear/kiswahili.html',{"single_lesson":single_lesson,"one_lesson":one_lesson,"one":one})
+
+def swahili_beginning(request):
+
+    return render(request, 'beginner/kiswahili.html')
+
 
 def swa_family(request):
     return render(request, 'beginner/family-swa.html')
