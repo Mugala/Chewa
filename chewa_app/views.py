@@ -51,6 +51,7 @@ def translator(request):
         title="Translate "
         message="Nothing found sorry"
         return render(request, 'user/translator.html', {"message":message,"title":title})
+        
 
 
 @login_required
