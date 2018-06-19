@@ -14,7 +14,7 @@
             <h3>Translator</h3>
             <form action="{% url 'translate' %}" role='search'>
                     <input type="text" method='get' placeholder="Input Word" name="translator">
-                    <input list="languages" placeholder="Choose Langauge"  method='get' name='language'>
+                    <input list="languages" placeholder="Choose Language"  method='get' name='language'>
                     <datalist id="languages">
                         {% for language in languages %}
                         <option value="{{language.name}}">
