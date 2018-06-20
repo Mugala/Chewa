@@ -23,8 +23,18 @@ input[value=text] {
   opacity: 1;
   color:white;
 }
-.content > *{
-  opacity: 1;
+#back2{
+  height:42em;
+  width:40em;
+  border-radius: 3%;
+  padding:3%;
+  background:#76b5c1;
+  color:white;
+  margin-top:5%;
+  padding-bottom:3%;
+}
+.content{
+  padding:3%;
 }
 #response{
   height:auto;
