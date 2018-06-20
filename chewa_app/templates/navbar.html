@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
   <!-- Font Awesome -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Bootstrap core CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
-
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Bootstrap tooltips -->
@@ -24,9 +20,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js"></script>
 </head>
 <body>
-
   <html lang="en" class="full-height">
-
   <!--Main Navigation-->
   <header>
     <style>
@@ -43,107 +37,71 @@
     .navbar {
         background-color: transparent;
         height:10vh;
-
+        
     }
     input[type="text"]
     {
         font-size:14px;
     }
-
     .top-nav-collapse {
-        background-color: #8ee1f2;
+        background-color: #89cad8;
         color:white;
     }
-
     @media only screen and (max-width: 768px) {
         .navbar {
-            background-color: color:#8ee1f2;
+            background-color: color #89cad8;
             color:white;
+            margin-bottom:3%;
         }
     }
-
-
     </style>
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-
         <a class="navbar-brand" href="{% url 'landing_page'%}"><img src="/media/logo.jpg" style="height:3em;mix-blend-mode: multiply;"></a>
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent" >
           <ul class="navbar-nav mr-auto" style="font-size:180%;font-family: 'Quicksand', sans-serif;">
             <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home_page' %}" style="color:#4d95a5;">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'home_page' %}" style="color:black;">Home <span class="sr-only">(current)</span></a>
             </li>
-
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="color:#4d95a5;">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="color:black;">
                 Classes
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'swa-begin' %}">Beginner-Swahili</a>
-
                 <a class="dropdown-item" href="{% url 'kikuyu-begin' %}">Beginner-Kikuyu</a>
                 <a class="dropdown-item" href="{% url 'luo-begin' %}">Beginner-Luo</a>
-                <a class="dropdown-item" href="{% url 'ksl-begin'%}">Beginner-KSL</a>
+                <a class="dropdown-item" href="#">Beginner-KSL</a>
                 <div class="dropdown-divider"></div>
-
               </div>
             </li>
-
             {% if user.is_authenticated%}
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="color:#4d95a5;">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="color:black;">
                 Profile
               </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size:70%;">
               <a class="dropdown-item" href="{% url 'edit_profile'%}">Edit Profile</a>
-
               <a class="dropdown-item" href="{% url 'view_profile'%}">View Profile</a>
-
               <div class="dropdown-divider"></div>
-
             </div>
           </li>
-
             <li class="nav-item">
-              <a class="nav-link disabled" href="{% url 'logout'%}"  style="color:#4d95a5;">Logout</a>
+              <a class="nav-link disabled" href="{% url 'logout'%}"  style="color:black;">Logout</a>
             </li>
-
             {% else %}
             <li class="nav-item">
-              <a class="nav-link disabled" href="{% url 'login'%}"  style="color:#4d95a5;">Login</a>
+              <a class="nav-link disabled" href="{% url 'login'%}"  style="color:black;">Login</a>
             </li>
-
             {% endif %}
-
           </ul>
-          {% if user.is_superuser %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:4d95a5;">
-              User Admin
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item"  href="{% url 'lesson'%}">Create Lesson</a>
-          <a class="dropdown-item" href="{% url 'language'%}">Add Language</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="admin/">Admin Page</a>
-        </div>
-        </li>
-        {% else %}
-        {% endif%}
-
           <form class="form-inline md-form form-sm active-pink active-pink-2 my-2 my-lg-0" role="search" action="{% url 'search_results' %}"style="width:50%;">
               <i class="fa fa-search" aria-hidden="true"></i>
               <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Translate here..." aria-label="Search">
           </form>
       </div>
-
       </nav>
-
-
-
 </body>
 </html>

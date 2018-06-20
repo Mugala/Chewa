@@ -22,13 +22,11 @@ class LanguageDetails (forms.ModelForm):
         model = Language
         fields = ['name', ]
 
-
 class AnswersDetails (forms.ModelForm):
     class Meta:
 
         model = Answers
         fields =['answer','image']
-
 
 class EditProfile(forms.ModelForm):
     class Meta:

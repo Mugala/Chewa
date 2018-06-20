@@ -12,6 +12,12 @@ from django.http import (Http404, HttpResponse, HttpResponseRedirect,
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import resolve
 from rest_framework import status
+from django.shortcuts import render,redirect, get_object_or_404
+from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
+from .models import Language,Lesson,Level,Content,Profile,Score,Question,Answers
+from .forms import ProfileDetails,LanguageDetails,LessonDetails,AnswersDetails,QuestionDetails,EditProfile
+from .models import Language,Lesson,Level,Content,Profile,Score
+from .forms import ProfileDetails,LanguageDetails,LessonDetails, EditProfile
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from social_django.models import UserSocialAuth
@@ -31,8 +37,10 @@ def landing_page(request):
 
 @login_required
 def home_page(request):
-    current_user = request.user
-    languages = Language.objects.all()
+    current_user=request.user
+    languages=Language.objects.all()
+      
+    
 
     return render(request, 'home.html', {"languages": languages})
 
@@ -53,9 +61,10 @@ def translator(request):
 
         return render(request, 'user/translator.html', {"message": message, "words": translate_word, 'language': search_language})
     else:
-        title = "Translate "
-        message = "Nothing found sorry"
-        return render(request, 'user/translator.html', {"message": message, "title": title})
+        title="Translate "
+        message="Nothing found sorry"
+        return render(request, 'user/translator.html', {"message":message,"title":title})
+        
 
 
 @login_required
@@ -158,16 +167,13 @@ def content(request, language, level):
         language = request.GET.get('language')
         print(language)
         currentUrl = request.get_full_path()
-        lan = currentUrl.split('/')
-
-        language = lan[1]
+        lan=currentUrl.split('/')
+        language=lan[1]
         print(language)
         print(currentUrl)
         level = request.GET.get('level')
         print("here" + level)
-
-        contents = Lesson.objects.filter(
-            level__level=level, language__name=language)
+        contents=Lesson.objects.filter(level__level=level, language__name=language)
         print(contents)
         chosen = random.choice(contents)
         return render(request, 'user/content.html', {"contents": chosen, "profile": profile})

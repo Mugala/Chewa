@@ -8,6 +8,7 @@ from django.core.validators import MaxValueValidator, MinLengthValidator, MinVal
 
 # Create your models here.
 
+
 class Profile (models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()

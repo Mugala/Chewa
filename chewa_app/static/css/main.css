@@ -10,3 +10,39 @@ input[value=text] {
     width: 100px;
     transition: ease-in-out, width .35s ease-in-out;
 }
+
+#back{
+  margin-left:28%;
+  margin-right:20%;
+  margin-top: 10%;
+  height:35em;
+  width:40em;
+  border-radius: 3%;
+  padding:3%;
+  background:#76b5c1;
+  opacity: 1;
+  color:white;
+}
+#back2{
+  height:42em;
+  width:40em;
+  border-radius: 3%;
+  padding:3%;
+  background:#76b5c1;
+  color:white;
+  margin-top:5%;
+  padding-bottom:3%;
+}
+.content{
+  padding:3%;
+}
+#response{
+  height:auto;
+}
+@media only screen and (max-width: 480px), only screen and (max-width: 760px)
+{
+*{
+
+}
+
+}
