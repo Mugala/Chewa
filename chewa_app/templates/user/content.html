@@ -18,7 +18,7 @@
         <div class="card-body">
           <h2 class="card-title">Username: {{profile.name}}</h2>
           <p class="card-text">You are currently learning:{{contents.language}} </p>
-          <p class="card-text">Your total_score : <strong>{{ profile.total_score}}</strong></p>
+          <p class="card-text" id="total_score" >Your total_score : <strong>{{ profile.total_score}}</strong></p>
           <p class="card-text">This question has {{contents.score}} points</p></p>
 
         </div>
@@ -87,6 +87,7 @@
                     'data':$(this).serialize(),
                     'dataType':'json',
                     'success': function(response){
+                        console.log(response)
                     $("#total_score").html(`<p>Your total_score : ${ response.total_score}</p>`);
                     $("#response").html(`<h5 style="color:green;">Correct!</h5>`)
 
