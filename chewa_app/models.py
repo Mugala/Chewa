@@ -96,7 +96,7 @@ class Level (models.Model):
 
 
 class Lesson (models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.CharField(max_length = 150)
     answer = models.ForeignKey(Answers, on_delete=models.CASCADE)
     choice1=models.CharField(max_length=150)
     choice2=models.CharField(max_length=150)
@@ -108,7 +108,7 @@ class Lesson (models.Model):
     score = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
 
     def __str__(self):
-        return self.question.question
+        return self.question
 
 
     def save_Lesson(self):
