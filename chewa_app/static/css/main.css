@@ -26,6 +26,9 @@ input[value=text] {
 .content > *{
   opacity: 1;
 }
+#response{
+  height:auto;
+}
 @media only screen and (max-width: 480px), only screen and (max-width: 760px)
 {
 *{

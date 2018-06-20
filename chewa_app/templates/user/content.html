@@ -26,6 +26,9 @@
           </div>
 
           <div class="col-xs-offset-4">
+                <div id="response"class="text-center">
+
+                    </div>
             <h1 style="font-size:200%;">Question: {{contents.question }}</h1>
 
             <form id="get_answer" action="{% url 'answer' contents.score %}">
@@ -40,13 +43,12 @@
                 <br>
                 <input type="submit" style="margin-top:1em;">
               </form>
-              <div id="response">
-
-                </div>
+              
                 <button id="reveal_answer" style="margin-top:1em;">Show answer</button>
                 <div class="show_answer">
                     {{contents.answer}}
                 </div>
+                
                 <form action="{% url 'content' language=contents.language level=contents.level %}">
                         <input type="hidden" method='get' type="submit" value="{{contents.level}}", name="level">
                         <button class="btn btn-info" style="margin-top:1em;font-size:100%;">Next Question</button>
@@ -89,14 +91,20 @@
                     'success': function(response){
                         console.log(response)
                     $("#total_score").html(`<p>Your total_score : ${ response.total_score}</p>`);
-                    $("#response").html(`<h5 style="color:green;">Correct!</h5>`)
+                    $("#response").html(`<img src="http://www.clker.com/cliparts/d/b/3/7/13099636921470906221correct.svg.med.png" style="width:30%;" class="img-control" alt=""><br><h3 style="color:green;">Correct!</h3>`)
+                    $('#response').fadeIn('slow');
+                    $('#response').fadeOut('slow');
 
                     },
                     })
             }
             else{
-                $("#response").html(`<h5 style="color:red;">Wrong. Try again!</h5>`)
-                form[0].reset();
+                $("#response").html(`<img src="http://pluspng.com/img-png/png-wrong-cross-png-small-medium-large-600.png" style="width:10%;" class="img-control" alt=""><br><h5 style="color:red;">Wrong. Try again!</h5>`)
+                $('#response').fadeIn('slow');
+                $('#response').fadeOut('slow');
+
+                form[0].reset()
+                
             }
 
 
