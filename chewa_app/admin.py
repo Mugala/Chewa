@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Language,Profile,Level,Lesson,Content
+from .models import Language,Profile,Level,Lesson,Content,Answers,Question
 
 # Register your models here.
 
@@ -8,8 +8,10 @@ class LessonsAdmin(admin.ModelAdmin):
     filter_horizontal = ('Language',)
 
 
+admin.site.register(Answers)
+admin.site.register(Question)
 admin.site.register(Language)
-admin.site.register(Profile)   
-admin.site.register(Level)   
-admin.site.register(Lesson)   
-admin.site.register(Content) 
+admin.site.register(Profile)
+admin.site.register(Level)
+admin.site.register(Lesson)
+admin.site.register(Content)

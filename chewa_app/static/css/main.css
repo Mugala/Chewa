@@ -1,6 +1,28 @@
 #image{
   height:1vh;
 }
-*{
-  color:yellow;
+.jumbotron{
+  background-image: url('/media/homepage.jpg');
+  background-size: cover;
+
+}
+input[value=text] {
+    width: 100px;
+    transition: ease-in-out, width .35s ease-in-out;
+}
+
+#back{
+  margin-left:28%;
+  margin-right:20%;
+  margin-top: 10%;
+  height:35em;
+  width:40em;
+  border-radius: 3%;
+  padding:3%;
+  background:lightseagreen;
+  opacity: .5;
+  color:white;
+}
+.content{
+  opacity: 1;
 }

@@ -45,8 +45,6 @@ class Language (models.Model):
     @classmethod
     def language (cls):
         language_details = cls.objects.all()
-        return language_details
-
 
 class Content (models.Model):
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
@@ -70,6 +68,19 @@ class Content (models.Model):
     class Meta:
         ordering = ['language']
 
+class Answers(models.Model):
+    answer=models.CharField(max_length=100)
+    image = models.ImageField(upload_to = 'chewa_img/',null=True)
+
+
+    def __str__(self):
+        return self.answer
+
+class Question (models.Model):
+    question = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.question
 
 class Level (models.Model):
     level = models.CharField(max_length = 30)
@@ -85,18 +96,20 @@ class Level (models.Model):
 
 
 class Lesson (models.Model):
-    question = models.CharField(max_length=50)
-    answer = models.CharField(max_length=50)
-    choice1=models.CharField(max_length=50)
-    choice2=models.CharField(max_length=50)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answers, on_delete=models.CASCADE)
+    choice1=models.CharField(max_length=150)
+    choice2=models.CharField(max_length=150)
     content=models.ForeignKey(Content,on_delete=models.CASCADE)
     language = models.ForeignKey(Language,on_delete=models.CASCADE, null=True)
     level = models.ForeignKey(Level,on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to = 'chewa_img/',null=True)
+    audio = models.FileField(null=True)
     score = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
 
     def __str__(self):
-        return self.question
+        return self.question.question
+
 
     def save_Lesson(self):
         self.save()
@@ -119,14 +132,22 @@ class Lesson (models.Model):
         results=cls.objects.filter(question__icontains=search_term)
         return results
 
+    @classmethod
+    def search_answers(cls,search_term):
+        ans = cls.objects.filter(question__question__icontains=search_term)
+        print(ans)
+        return ans
+
+
+
 class Score (models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     score=models.IntegerField(default=0, null=True)
 
     def __str__(self):
-        return self.user.name
+        return self.score
 
     @classmethod
-    def get_likes(cls):
+    def get_scores(cls):
         score=cls.objects.all()
         return score

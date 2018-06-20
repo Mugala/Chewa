@@ -4,19 +4,22 @@
 <html>
 
 <head>
-  <meta charset="utf-8"> 
+  <meta charset="utf-8">
   {% if title %}
   <title>Chewa - {{title}}</title>
   {% else %}
   <title> Chewa </title>
-  {% endif %} {% block styles %} {% bootstrap_css %}
+  {% endif %} {% block styles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  {% bootstrap_css %}
+
   {% endblock %}
 
 
 </head>
 
 <body>
-  {% include 'navbar.html'%} {% block content %} {%endblock%} {% block scripts %}
+   {% block content %} {%endblock%} {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   {% bootstrap_javascript %} {% endblock %}
 </body>

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Language,Profile,Level,Lesson,Content
+from .models import Language,Profile,Level,Lesson,Content,Answers,Question
 
 
 class ProfileDetails (forms.ModelForm):
@@ -13,15 +13,29 @@ class LessonDetails (forms.ModelForm):
         model = Lesson
         exclude = ['image']
         widgets = {
-            'answers': forms.CheckboxSelectMultiple(),
+            'answers': forms.RadioSelect(),
         }
+
 
 class LanguageDetails (forms.ModelForm):
     class Meta:
         model = Language
         fields = ['name', ]
 
+class AnswersDetails (forms.ModelForm):
+    class Meta:
+
+        model = Answers
+        fields =['answer','image']
+
 class EditProfile(forms.ModelForm):
     class Meta:
         model= Profile
         fields=['name', 'email']
+
+
+class QuestionDetails (forms.ModelForm):
+    class Meta:
+
+        model = Question
+        fields =['question']
