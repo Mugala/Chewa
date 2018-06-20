@@ -1,4 +1,4 @@
-{% extends 'dashboard/base.html'%}
+{% extends 'base.html'%}
 {% load bootstrap3 %}
 {% load static %}
 {% block styles %}
@@ -6,7 +6,10 @@
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 {%endblock %}
 {% block content %}
+<script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
+
 {{block.super}}
+{% include 'quiznavbar.html' %}
 
 <br><br><br><br><br><br>
 
@@ -14,7 +17,7 @@
     <div class="row">
 
 {% if contents%}
-      <div class="card" style="width: 30rem;font-size:110%;">
+      <!-- <div class="card text-center" style=" margin-right:5%; width: 80rem;font-size:110%; background:#76b5c1; color:white;">
         <div class="card-body">
           <h2 class="card-title">Username: {{profile.name}}</h2>
           <p class="card-text">You are currently learning:{{contents.language}} </p>
@@ -22,13 +25,17 @@
           <p class="card-text">This question has {{contents.score}} points</p></p>
 
         </div>
-      </div>
+      </div> -->
           </div>
+          <div id="response"class="text-center">
 
+            </div>
+            <div class="show_answer">
+                    <h1 class="text-center">Answer: {{contents.answer}}</h1>
+                    <hr>
+                </div>
           <div class="col-xs-offset-4">
-                <div id="response"class="text-center">
-
-                    </div>
+               
             <h1 style="font-size:200%;">Question: {{contents.question }}</h1>
 
             <form id="get_answer" action="{% url 'answer' contents.score %}">
@@ -41,17 +48,16 @@
                 <span style="font-size:150%;">
                 <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"> {{contents.choice1}} </span>
                 <br>
-                <input type="submit" style="margin-top:1em;">
+                <input class="btn btn-info" style="font-size:120%; display: inline;" type="submit" style="margin-top:1em;">
               </form>
               
-                <button id="reveal_answer" style="margin-top:1em;">Show answer</button>
-                <div class="show_answer">
-                    {{contents.answer}}
-                </div>
+                <button class="btn btn-info" style="font-size:120%; display: inline;"id="reveal_answer" style="margin-top:1em;">Show answer</button>
+               
                 
                 <form action="{% url 'content' language=contents.language level=contents.level %}">
-                        <input type="hidden" method='get' type="submit" value="{{contents.level}}", name="level">
-                        <button class="btn btn-info" style="margin-top:1em;font-size:100%;">Next Question</button>
+                        <input class="btn btn-info" type="hidden" method='get' type="submit" value="{{contents.level}}", name="level">
+                       
+                        <button class="btn btn-info" style="margin-top:1em;font-size:100%;">Next Question  <ion-icon  name="arrow-round-forward"></ion-icon></button>
                     </form>
 
                     {% else %}
@@ -90,8 +96,8 @@
                     'dataType':'json',
                     'success': function(response){
                         console.log(response)
-                    $("#total_score").html(`<p>Your total_score : ${ response.total_score}</p>`);
-                    $("#response").html(`<img src="http://www.clker.com/cliparts/d/b/3/7/13099636921470906221correct.svg.med.png" style="width:30%;" class="img-control" alt=""><br><h3 style="color:green;">Correct!</h3>`)
+                    $("#total_score").html(`<p>Total: ${ response.total_score}</p>`);
+                    $("#response").html(`<img src="http://www.clker.com/cliparts/d/b/3/7/13099636921470906221correct.svg.med.png" style="width:10%;" class="img-control" alt=""><br><h3 style="color:green;">Correct!</h3>`)
                     $('#response').fadeIn('slow');
                     $('#response').fadeOut('slow');
 
