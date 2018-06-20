@@ -33,8 +33,18 @@
                   <button class='btn btn-danger' type="submit">Login</button>
                 </form>
                 <br>
-                <p>No account? Sign up <a style="color: red;"href="{% url 'sign_up' %}">here</a>
+                <p>No account? Sign up <a style="color:#C92229;"href="{% url 'sign_up' %}">here</a>
                 </p>
+                <hr>
+                <!-- <h3 class="text-center">Social Login</h3> -->
+                <div id="google">
+                  <form action="{% url 'social:begin' 'google-oauth2' %}">
+                      {% csrf_token %}
+                      <img src="https://fthmb.tqn.com/IH_l1QnIcFddCFuviMJ7UuRJfko=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/google-plus-57d9e4d53df78c9cceedc5e1.png" alt="" style="width:6%; display:inline-block" class="img-responsive" >
+                    <input class="btn btn-danger" style="display:inline-block;"type="submit" value="Login with Google Account" method='post'>
+                  </form>
+                </div>
+                <br>
           </div>
             </div>
     </div>

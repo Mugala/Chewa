@@ -19,10 +19,17 @@ input[value=text] {
   width:40em;
   border-radius: 3%;
   padding:3%;
-  background:lightseagreen;
-  opacity: .5;
+  background:#7EC7DC;
+  opacity: 1;
   color:white;
 }
-.content{
+.content > *{
   opacity: 1;
+}
+@media only screen and (max-width: 480px), only screen and (max-width: 760px)
+{
+*{
+  background: black;
+}
+
 }
