@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js"></script>
+</head>
+
+<body>
+    <html lang="en" class="full-height">
+    <!--Main Navigation-->
+    <header>
+        <style>
+            .view {
+                background: url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg")no-repeat center center;
+                background-size: cover;
+            }
+
+            @media (min-width: 768px) {
+                .view {
+                    overflow: visible;
+                    margin-top: -56px;
+                }
+            }
+
+            .navbar {
+                background-color: transparent;
+                height: 10vh;
+                color: white;
+
+            }
+
+
+            input[type="text"] {
+                font-size: 14px;
+            }
+
+            .top-nav-collapse {
+                background-color: #89cad8;
+                color: white;
+            }
+
+            @media only screen and (max-width: 768px) {
+                .navbar {
+                    background-color: color:#89cad8 color:white;
+                    margin-bottom: 3%;
+                }
+            }
+        </style>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+            <a class="navbar-brand" href="{% url 'landing_page'%}">
+                <img src="/media/logo.jpg" style="height:3em;mix-blend-mode: multiply;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto" style="font-size:180%;font-family: 'Quicksand', sans-serif;">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home_page' %}" style="color:black;">  Home Page
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="color:black; font-size:180%;">
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="color:black;">
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="color:black;">
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="color:black;">
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="color:black;">
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="color:black;">
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="color:black;">
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" id="total_score" style="color:black; font-size:180%;">
+                            <strong>Total: {{ profile.total_score}}</strong>
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                            <a class="nav-link" href="#" id="total_score" style="color:black; font-size:180%;">
+                                <strong></strong>
+                                <span class="sr-only"></span>
+                            </a>
+                        </li>
+                </ul>
+            </div>
+        </nav>
+</body>
+
+</html>
