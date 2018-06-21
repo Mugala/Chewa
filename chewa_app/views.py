@@ -323,7 +323,10 @@ def search_results(request):
 
     if 'answer' in request.GET and request.GET["answer"]:
         search_term = request.GET.get("answer")
-        searched_answers_by_question = Lesson.search_answers(search_term)
+        print("hey")
+        print(search_term)
+        searched_answers_by_question = Lesson.objects.filter(question__icontains=search_term)
+        print(searched_answers_by_question)
         results = [*searched_answers_by_question]
         message = f"{search_term}"
 
