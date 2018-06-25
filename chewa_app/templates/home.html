@@ -7,7 +7,7 @@
 {%endblock %}
 {% block content %}
 {{block.super}}
-<div class="container" style="font-family: 'Quicksand', sans-serif;color:#45b4c6;">
+<div class="container" style="font-family: 'Quicksand', sans-serif;color:#4d95a5;margin-top:9em;">
     <div class="row">
         <div class="col-xs-12">
             <hr>
@@ -22,26 +22,31 @@
                     </datalist>
                 <input type="submit" value="translate">
                 </form>
-           
+
             <hr>
             <h1>Hey {{user.username}}</h2>
-                
+
                 <h3>Choose a language to learn</h3>
-                {% for language in languages %}
-
-
-
-
-
-                <form action="{% url 'level' language.name %}" style="margin-left:-30vw;font-family: 'Quicksand', sans-serif;">
-                    <input method='get' type="submit" value="{{language.name}}" name="language" class="btn btn-info btn-rounded" style="opacity:0.8;font-size:300%;float:right;margin-right:2%;margin-top:4%;height:30vh;width:15%;">
-                </form>
-
-                {% endfor %}
+               
+            </div>
         </div>
+    </div>
+           
+            <div class="container">
+            <div class="row">
+                    {% for language in languages %}
+            <div class="col-xs-12">
+                <form action="{% url 'level' language.name %}" style="margin-left:-30vw;font-family: 'Quicksand', sans-serif;">
+                    <input method='get' type="submit" value="{{language.name}}" name="language" class="btn btn-info btn-rounded" style="opacity:0.8;font-size:280%;float:right;margin-right:2%;margin-top:4%;height:30vh;width:15%;">
+                </form>
+        </div>
+        {% endfor %}
     </div>
 </div>
 
 
 
 {% endblock %}
+
+
+

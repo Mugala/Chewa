@@ -13,7 +13,7 @@
 
 <br><br><br><br><br><br>
 
-<div class="container" style="font-family: 'Quicksand', sans-serif;color:#3a97a5;font-size:150%;">
+<div class="container" style="font-family: 'Quicksand', sans-serif;color:#3a97a5;font-size:150%; margin-top: 100px; margin-left: 30px;">
     <div class="row">
 
 {% if contents%}
@@ -109,8 +109,12 @@
                     'success': function(response){
                         console.log(response)
                     $("#total_score").html(`<p>Total: ${ response.total_score}</p>`);
+<<<<<<< HEAD
                     // $('#loader').hide();
                     $("#response").html(`<img src="http://www.clker.com/cliparts/d/b/3/7/13099636921470906221correct.svg.med.png" style="width:10%;" class="img-control" alt=""><br><h3 style="color:green;">Correct!</h3>`)
+=======
+                    $("#response").html(`<img src="http://shopforclipart.com/images/cliparts-yes-food/12.jpg" style="width:10%;" class="img-control" alt=""><br><h3 style="color:green;">Correct!</h3>`)
+>>>>>>> ef8f0c2e20e17dd542c5acde7864a530139f6338
                     $('#response').fadeIn('slow');
                     $('#response').fadeOut('slow');
 

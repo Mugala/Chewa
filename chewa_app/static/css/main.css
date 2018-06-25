@@ -10,7 +10,9 @@ input[value=text] {
     width: 100px;
     transition: ease-in-out, width .35s ease-in-out;
 }
-
+*{
+  color:yellow;
+}
 #back{
   margin-left:28%;
   margin-right:20%;

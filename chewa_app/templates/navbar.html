@@ -49,7 +49,7 @@
     }
     @media only screen and (max-width: 768px) {
         .navbar {
-            background-color: color:#89cad8
+            background-color: color #89cad8;
             color:white;
             margin-bottom:3%;
         }
@@ -73,7 +73,7 @@
                 <a class="dropdown-item" href="{% url 'swa-begin' %}">Beginner-Swahili</a>
                 <a class="dropdown-item" href="{% url 'kikuyu-begin' %}">Beginner-Kikuyu</a>
                 <a class="dropdown-item" href="{% url 'luo-begin' %}">Beginner-Luo</a>
-                <a class="dropdown-item" href="#">Beginner-KSL</a>
+                <a class="dropdown-item" href="{% url 'ksl-begin' %}">Beginner-KSL</a>
                 <div class="dropdown-divider"></div>
               </div>
             </li>
@@ -89,17 +89,17 @@
             </div>
           </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="{% url 'logout'%}"  style="color:black;">Logout</a>
+              <a class="nav-link" href="{% url 'logout'%}"  style="color:#4d95a5;">Logout</a>
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link disabled" href="{% url 'login'%}"  style="color:black;">Login</a>
+              <a class="nav-link" href="{% url 'login'%}"  style="color:black;">Login</a>
             </li>
             {% endif %}
           </ul>
           <form class="form-inline md-form form-sm active-pink active-pink-2 my-2 my-lg-0" role="search" action="{% url 'search_results' %}"style="width:50%;">
               <i class="fa fa-search" aria-hidden="true"></i>
-              <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Translate here..." aria-label="Search">
+              <input class="form-control form-control-sm ml-3 w-75" name='answer' type="text" placeholder="Translate here..." aria-label="Search">
           </form>
       </div>
       </nav>
