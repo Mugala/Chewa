@@ -51,17 +51,17 @@
                 <span style="font-size:150%;">
                 <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"> {{contents.choice1}} </span>
                 <br>
+                <input type="hidden" method='get'  name="point" value="{{contents.score}}">
                 <input class="btn btn-info" style="font-size:120%; display: inline;" type="submit" style="margin-top:1em;">
               </form>
               
                 <button class="btn btn-info" style="font-size:120%; display: inline;"id="reveal_answer" style="margin-top:1em;">Show answer</button>
-               
                 
                 <form action="{% url 'content' language=contents.language level=contents.level %}">
                         <input class="btn btn-info" type="hidden" method='get' type="submit" value="{{contents.level}}", name="level">
-                       
                         <button class="btn btn-info" style="margin-top:1em;font-size:100%;">Next Question  <ion-icon  name="arrow-round-forward"></ion-icon></button>
                     </form>
+                   
 
                     {% else %}
                     {{message}}
@@ -77,14 +77,6 @@
 
 <script>
      $(document).ready(function(){
-        var $loading = $('#loading').hide();
-        $(document).ajaxStart(function(){
-            $('#loader').show();
-        });
-        $(document).ajaxStop(function(){
-            $('#loader').hide();
-            });
-       
                   
          /*hide and show answer*/
          $('.show_answer').hide();
@@ -103,18 +95,13 @@
             if(answer==correct){
                 $.ajax({
                     'url':url,
-                    'type':'POST',
+                    'type':'GET',
                     'data':$(this).serialize(),
                     'dataType':'json',
                     'success': function(response){
                         console.log(response)
                     $("#total_score").html(`<p>Total: ${ response.total_score}</p>`);
-<<<<<<< HEAD
-                    // $('#loader').hide();
-                    $("#response").html(`<img src="http://www.clker.com/cliparts/d/b/3/7/13099636921470906221correct.svg.med.png" style="width:10%;" class="img-control" alt=""><br><h3 style="color:green;">Correct!</h3>`)
-=======
                     $("#response").html(`<img src="http://shopforclipart.com/images/cliparts-yes-food/12.jpg" style="width:10%;" class="img-control" alt=""><br><h3 style="color:green;">Correct!</h3>`)
->>>>>>> ef8f0c2e20e17dd542c5acde7864a530139f6338
                     $('#response').fadeIn('slow');
                     $('#response').fadeOut('slow');
 

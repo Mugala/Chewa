@@ -188,11 +188,10 @@ def content(request, language, level):
 @login_required
 def answer(request, point):
     current_user = request.user
-    point = request.GET.get('point')
-    currentUrl = request.get_full_path()
-    point = currentUrl.split('/')
+    pointer = request.GET.get('point')
+    print(pointer)
     profile = Profile.objects.get(user=current_user)
-    profile.total_score += int(point[-1])
+    profile.total_score += int(pointer)
     profile.save()
 
     print(profile)
