@@ -4,42 +4,6 @@
 {% block styles %}
 {% bootstrap_css %}
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
-
-<style>
-    #langauges{
-        opacity:0.8;
-        font-size:280%;
-        margin-right:2%;
-        margin-top:4%;
-        height:30vh; 
-        width:15%;
-    }
-    .btn-info {
-    background-color: #33b5e5!important;
-    color: #fff!important;
-    height: 20vh;
-    width:20vw;
-    font-size: 800%;
-}
-
-@media only screen and (max-width: 480px)
-{
-*{
-    color:yellow;
-}
-
- #languages{
-      
-      font-size: 280%;
-    float: right;
-    margin-right: 16%;
-    margin-top: 4%;
-    
-}
-    
-}
-}
-</style>
 {%endblock %}
 {% block content %}
 {{block.super}}
@@ -63,27 +27,22 @@
             <h1>Hey {{user.username}}</h2>
 
                 <h3>Choose a language to learn</h3>
-               
-            </div>
-        </div>
-    </div>
-           
-            <div class="container">
-            <div class="row">
-                    {% for language in languages %}
-            <div class="col-xs-4">
-                hey
-                <form action="{% url 'level' language.name %}" style="margin-left:0vw;font-family: 'Quicksand', sans-serif;">
-                    <input id ="languages" method='get' type="submit" value="{{language.name}}" name="language" class="btn btn-info btn-rounded">
+                {% for language in languages %}
+
+
+
+
+
+                <form action="{% url 'level' language.name %}" style="margin-left:-30vw;font-family: 'Quicksand', sans-serif;">
+                    <input method='get' type="submit" value="{{language.name}}" name="language" class="btn btn-info btn-rounded" style="opacity:0.8;font-size:280%;float:right;margin-right:2%;margin-top:4%;height:30vh;width:15%;">
                 </form>
+
+                {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
 
 
 
 {% endblock %}
-
-
 
