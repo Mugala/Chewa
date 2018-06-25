@@ -27,6 +27,9 @@
         </div>
       </div> -->
           </div>
+          <div id="loader" style="display:none;">
+              <img src="https://loading.io/spinners/typing/lg.-text-entering-comment-loader.gif" alt="">
+          </div>
           <div id="response"class="text-center">
 
             </div>
@@ -74,6 +77,15 @@
 
 <script>
      $(document).ready(function(){
+        var $loading = $('#loading').hide();
+        $(document).ajaxStart(function(){
+            $('#loader').show();
+        });
+        $(document).ajaxStop(function(){
+            $('#loader').hide();
+            });
+       
+                  
          /*hide and show answer*/
          $('.show_answer').hide();
          $('#reveal_answer').click(function(){
@@ -97,6 +109,7 @@
                     'success': function(response){
                         console.log(response)
                     $("#total_score").html(`<p>Total: ${ response.total_score}</p>`);
+                    // $('#loader').hide();
                     $("#response").html(`<img src="http://www.clker.com/cliparts/d/b/3/7/13099636921470906221correct.svg.med.png" style="width:10%;" class="img-control" alt=""><br><h3 style="color:green;">Correct!</h3>`)
                     $('#response').fadeIn('slow');
                     $('#response').fadeOut('slow');
@@ -112,6 +125,7 @@
                 form[0].reset()
                 
             }
+            
 
 
         })
