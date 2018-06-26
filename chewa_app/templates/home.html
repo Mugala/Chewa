@@ -22,27 +22,17 @@
                     </datalist>
                 <input type="submit" value="translate">
                 </form>
-
             <hr>
             <h1>Hey {{user.username}}</h2>
-
                 <h3>Choose a language to learn</h3>
                 {% for language in languages %}
-
-
-
-
-
-                <form action="{% url 'level' language.name %}" style="margin-left:-30vw;font-family: 'Quicksand', sans-serif;">
-                    <input method='get' type="submit" value="{{language.name}}" name="language" class="btn btn-info btn-rounded" style="opacity:0.8;font-size:280%;float:right;margin-right:2%;margin-top:4%;height:30vh;width:15%;">
+                <form action="{% url 'level' language.name %}" style="margin-left:2vw;font-family: 'Quicksand', sans-serif;">
+                    <input method='get' type="submit" value="{{language.name}}" name="language" class="btn btn-info btn-rounded" style="opacity:0.8;font-size:167%;float:left;margin-right:2%;margin-top:4%;height:25vh;width:45%;">
                 </form>
-
                 {% endfor %}
         </div>
     </div>
 </div>
-
-
-
 {% endblock %}
+
 

@@ -1,6 +1,7 @@
 
 {% load bootstrap3 %}
 {% load static %}
+{% block bootstrap3_extra_head %}
 
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,7 @@
   {% endif %} {% block styles %} {% bootstrap_css %}
   {% endblock %}
 
-  <link rel="shortcut icon" href="{% static 'favicon/smaller_R5A_icon.ico'%}"/>
+  <link rel="shortcut icon" href="{% static 'favicon/smaller_R5A_icon.ico' %}"/>
 </head>
 
 <body>
