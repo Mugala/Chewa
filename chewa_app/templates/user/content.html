@@ -27,6 +27,9 @@
         </div>
       </div> -->
           </div>
+          <div id="loader" style="display:none;">
+              <img src="https://loading.io/spinners/typing/lg.-text-entering-comment-loader.gif" alt="">
+          </div>
           <div id="response"class="text-center">
 
             </div>
@@ -48,17 +51,17 @@
                 <span style="font-size:150%;">
                 <input type="radio" name="{{contents.content}}" value="{{contents.choice1}}"> {{contents.choice1}} </span>
                 <br>
+                <input type="hidden" method='get'  name="point" value="{{contents.score}}">
                 <input class="btn btn-info" style="font-size:120%; display: inline;" type="submit" style="margin-top:1em;">
               </form>
               
                 <button class="btn btn-info" style="font-size:120%; display: inline;"id="reveal_answer" style="margin-top:1em;">Show answer</button>
-               
                 
                 <form action="{% url 'content' language=contents.language level=contents.level %}">
                         <input class="btn btn-info" type="hidden" method='get' type="submit" value="{{contents.level}}", name="level">
-                       
                         <button class="btn btn-info" style="margin-top:1em;font-size:100%;">Next Question  <ion-icon  name="arrow-round-forward"></ion-icon></button>
                     </form>
+                   
 
                     {% else %}
                     {{message}}
@@ -74,6 +77,7 @@
 
 <script>
      $(document).ready(function(){
+                  
          /*hide and show answer*/
          $('.show_answer').hide();
          $('#reveal_answer').click(function(){
@@ -91,7 +95,7 @@
             if(answer==correct){
                 $.ajax({
                     'url':url,
-                    'type':'POST',
+                    'type':'GET',
                     'data':$(this).serialize(),
                     'dataType':'json',
                     'success': function(response){
@@ -112,6 +116,7 @@
                 form[0].reset()
                 
             }
+            
 
 
         })

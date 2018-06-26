@@ -15,16 +15,18 @@
         <div class="row">
           <div class="col-xs-6 col-xs-offset-3" >
               <div id="back2">
+                    <img class="img-responsive" src="/media/logo.jpg" alt="" style="width:40%; margin-left: auto; margin-right: auto;">
                 <div class="content">
                     <h2 class="text-center">Sign Up</h2>
                     <hr>
                     <form method="post">
                         {% csrf_token %}
                         {% bootstrap_form form %}
-                        <button class='btn btn-danger' type="submit">Sign Up</button>
+                        <button class='btn btn-danger' type="submit">Sign Up</button><br>
+                        <a href="{% url 'login' %}"> Login in</a>
                       </form>
                       <hr>
-                       <a href="{% url 'login' %}"> Login in</a>
+                      
                       
                 </div>
                   </div>

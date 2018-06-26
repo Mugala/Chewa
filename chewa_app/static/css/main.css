@@ -14,17 +14,18 @@ input[value=text] {
 #back{
   margin-left:28%;
   margin-right:20%;
-  margin-top: 10%;
-  height:35em;
+  margin-top: 5%;
+  height:39em;
   width:40em;
   border-radius: 3%;
   padding:3%;
   background:#76b5c1;
   opacity: 1;
   color:white;
+  margin-bottom: 4%;
 }
 #back2{
-  height:42em;
+  height:45em;
   width:40em;
   border-radius: 3%;
   padding:3%;
@@ -39,10 +40,19 @@ input[value=text] {
 #response{
   height:auto;
 }
-@media only screen and (max-width: 480px), only screen and (max-width: 760px)
+@media only screen and (max-width: 480px)
 {
-*{
-
-}
+  #back{
+    margin-left:24%;
+    margin-right:20%;
+    margin-top: 10%;
+    height:39em;
+    width:40em;
+    border-radius: 3%;
+    padding:3%;
+    background:#76b5c1;
+    opacity: 1;
+    color:white;
+  }
 
 }
