@@ -18,13 +18,13 @@
   <title> Chewa </title>
   {% endif %} {% block styles %} {% bootstrap_css %}
   {% endblock %}
-
+<link rel="shortcut icon" href="{% static 'favicon/smaller_R5A_icon.ico'%}"/>
 
 </head>
 
 <body>
-  {% include 'navbar.html'%} 
-  {% block content %} {%endblock%} 
+  {% include 'navbar.html'%}
+  {% block content %} {%endblock%}
   {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   {% bootstrap_javascript %} {% endblock %}
