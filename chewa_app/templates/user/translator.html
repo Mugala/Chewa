@@ -15,6 +15,20 @@
                             {%for word in words%}
                             <h4> {{message}} in {{word.language.name}} is:
                             {{word.answer}}</h4> 
+            
+                            <div class="card" style="width: 33rem;font-size:110%;float:left;margin-left:2%;margin-top:2%;">
+                                <div class="card-body">
+                                  <img src="/media/{{word.image}}" style="height:34vh;margin-left:8%;">
+                              
+                                  <h2>{{one_lesson_item.answer}}</h2>
+                              
+                                  <audio controls>
+                                      <source src="/media/{{ word.audio }}" type="audio/mpeg">
+                                  </audio>
+                              
+                                </div>
+                              </div>
+
                             {%endfor%}
                             {% else %}
                             <h4>Nothing found for {{message}} in {{language}}</h4>

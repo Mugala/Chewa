@@ -27,7 +27,18 @@
       {% for answer in answers %}
         <div class="col-md-4">
           <span style="color:black;">  <h1>{{answer.language}} - {{answer.answer}}</span></h1>
-
+          <div class="card" style="width: 33rem;font-size:110%;float:left;margin-left:2%;margin-top:2%;">
+            <div class="card-body">
+              <img src="/media/{{answer.image}}" style="height:34vh;margin-left:8%;">
+          
+              <h2>{{one_lesson_item.answer}}</h2>
+          
+              <audio controls>
+                  <source src="/media/{{ answer.audio }}" type="audio/mpeg">
+              </audio>
+          
+            </div>
+          </div>
         </div>
       {% endfor %}
     {% endif %}
