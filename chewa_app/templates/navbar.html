@@ -37,7 +37,9 @@
     .navbar {
         background-color: transparent;
         height:10vh;
-        
+    }
+    .navbar-toggler{
+      margin-top: 1vh;
     }
     input[type="text"]
     {
@@ -49,9 +51,15 @@
     }
     @media only screen and (max-width: 768px) {
         .navbar {
-            background-color: color #89cad8;
+            background-color: #89cad8;
             color:white;
-            margin-bottom:3%;
+        }
+        .navbar-collapse  {
+          background-color: #89cad8;
+          opacity:0.85;
+        }
+        .navbarDropdown {
+          margin-left: 40vw;
         }
     }
     </style>
@@ -69,27 +77,27 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="color:black;">
                 Classes
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'swa-begin' %}">Beginner-Swahili</a>
-                <a class="dropdown-item" href="{% url 'kikuyu-begin' %}">Beginner-Kikuyu</a>
-                <a class="dropdown-item" href="{% url 'luo-begin' %}">Beginner-Luo</a>
-                <a class="dropdown-item" href="{% url 'ksl-begin' %}">Beginner-KSL</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-left:50%;margin-top:-10%;">
+                <a class="dropdown-item" href="{% url 'swa-begin' %}" style="font-size:1.2em;">Beginner-Swahili</a>
+                <a class="dropdown-item" href="{% url 'kikuyu-begin' %}" style="font-size:1.2em;">Beginner-Kikuyu</a>
+                <a class="dropdown-item" href="{% url 'luo-begin' %}" style="font-size:1.2em;">Beginner-Luo</a>
+                <a class="dropdown-item" href="{% url 'ksl-begin' %}" style="font-size:1.2em;">Beginner-KSL</a>
                 <div class="dropdown-divider"></div>
               </div>
             </li>
             {% if user.is_authenticated%}
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="color:black;">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="color:black;">
                 Profile
               </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size:70%;">
-              <a class="dropdown-item" href="{% url 'edit_profile'%}">Edit Profile</a>
-              <a class="dropdown-item" href="{% url 'view_profile'%}">View Profile</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size:70%;margin-left:50%;">
+              <a class="dropdown-item" href="{% url 'edit_profile'%}" style="font-size:1.2em;">Edit Profile</a>
+              <a class="dropdown-item" href="{% url 'view_profile'%}" style="font-size:1.2em;">View Profile</a>
               <div class="dropdown-divider"></div>
             </div>
           </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout'%}"  style="color:#4d95a5;">Logout</a>
+              <a class="nav-link" href="{% url 'logout'%}"  style="color:black;">Logout</a>
             </li>
             {% else %}
             <li class="nav-item">
@@ -97,6 +105,20 @@
             </li>
             {% endif %}
           </ul>
+        {% if user.is_superuser %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          User Admin
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"  href="{% url 'lesson'%}">Create Lesson</a>
+          <a class="dropdown-item" href="{% url 'language'%}">Add Language</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="admin/">Admin Page</a>
+        </div>
+      </li>
+      {% else %}
+      {% endif%}
           <form class="form-inline md-form form-sm active-pink active-pink-2 my-2 my-lg-0" role="search" action="{% url 'search_results' %}"style="width:50%;">
               <i class="fa fa-search" aria-hidden="true"></i>
               <input class="form-control form-control-sm ml-3 w-75" name='answer' type="text" placeholder="Translate here..." aria-label="Search">

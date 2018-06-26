@@ -1,8 +1,6 @@
 {% load bootstrap3 %} {% load static %}
-
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,36 +14,37 @@
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   {% bootstrap_css %}
   {% endblock %}
-
+<link rel="shortcut icon" href="{% static 'favicon/smaller_R5A_icon.ico'%}"/>
 <style>
 .jumbotron{
   background-color: white;
   height:45vh;
-
 }
 .jumbotron-fluid{
-
 }
 #main2{
-
   width:33%;
   margin-left: 67%;
   margin-top: -80%;
   mix-blend-mode: multiply;
-
 }
   #main{
-
     width:32%;
     margin-top: 71vh;
     mix-blend-mode: multiply;
   }
   #logo{
     width:38.2%;
-    margin-top:-99%;
+    margin-top:-109%;
     margin-left: 31%;
     mix-blend-mode: multiply;
-
+  }
+  #arrow{
+    margin-top:20%;
+    margin-left:45%;
+    height:20%;
+    border-radius:9%;
+    opacity:0.8;
   }
   @media only screen and (max-width: 768px) {
     /* For mobile phones: */
@@ -54,13 +53,11 @@
     }
 }
 </style>
-
+<link rel="shortcut icon" href="{% static 'favicon/smaller_R5A_icon.ico'%}"/>
 </head>
-
 <body>
   {% include 'navbar.html'%} {% block content %} {%endblock%} {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   {% bootstrap_javascript %} {% endblock %}
 </body>
-
 </html>

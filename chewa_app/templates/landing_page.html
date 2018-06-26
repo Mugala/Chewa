@@ -2,18 +2,6 @@
 {% load static %}
 {% block content %}
 <style>
-#everything{
-    overflow-x: hidden;
-    padding:3%;
-    margin-left: -4%;
-    
-}
-#bigicon{
-
-width: 23%;
-padding-top: 5%;
-
-}
 .gradient {
   background-image:
     linear-gradient(
@@ -22,17 +10,19 @@ padding-top: 5%;
     width:100vw;
     height:430%;
     margin-top: -70vh;
-    margin-left: -1.5vw;
+    margin-left: -2vw;
     border-bottom: 0px;
 }
 a {
   color:#c83a2e;
 }
-
+button {
+  margin-top:60vh;
+  margin-left: 10vw;
+}
 </style>
 
 <!-- <h1>Chewa</h1> -->
-<div id="everything">
 <div class="jumbotron" style="background-color:white;">
   <div class="gradient">
 
@@ -45,10 +35,12 @@ a {
 
 </div>
 
+<div class="animated bounce infinite"><button type="button" class="btn btn-outline-info" id="arrow"><span class="glyphicon glyphicon-arrow-down" style="font-size: 350%;"></span></button></div>
+
 
 <!--Jumbotron left-->
 
-    <div class="container fluid" style="margin-top:60%;">
+    <div class="container fluid" style="margin-top:20%;">
         <h1 class="h1-reponsive mb-4 mt-2" style="color:#76b5c1;text-align:center;font-size:4em;"> What is Chewa?</h1>
         <h3 class="lead" style="font-size:166%;">Chewa is a language learning web application that is designed to teach you the language of your choice, from beginner to a competent level of fluency. Our selection of languages are all local kenyan languages, starting with Kiswahili, Kikuyu, Luo, and KSL. We use a point based system so you can track your progress in each language, and have a lot of learning support. </h3>
     </div>
@@ -56,45 +48,47 @@ a {
 <!--Jumbotron-->
 <h3 style="margin-top:10vh;text-align:center;font-size:4em;color:#76b5c1">How do I use Chewa?</h3>
 <!--Jumbotron-->
-<div class="jumbotron jumbotron-fluid" style="margin-top:10vh;height:40%;width:45%;">
+<div class="jumbotron jumbotron-fluid" style="margin-top:10vh;height:35%;width:65%;">
 
     <div class="container">
           <h2 class="h1-reponsive mb-4 mt-2"><span style="color:#76b5c1;font-size:2em;margin-top:-2em;">1.</span></h2>
-        <h2 class="lead" style="margin-top:-0.5em; font-size:160%;">First create an account with us! You can use your google sign up or make a custom account with us.</h2>
+        <h2 class="lead" style="margin-top:-0.5em; font-size:150%;">First create an account with us! You can use your google sign up or make a custom account with us.</h2>
     </div>
 
 </div>
-<img id="bigicon" src="media/chewa_img/signup-icon.png" style="margin-left:60%;margin-top:-25%; ">
+<img src="media/chewa_img/signup-icon.png" style="margin-left:70%;margin-top:-45vh;width:25%;">
 <!--Jumbotron-->
 
 <!--Jumbotron right-->
-<div class="jumbotron jumbotron-fluid" style="margin-top:10vh;height:40%;width:50%;margin-left:50vw;">
+<div class="jumbotron jumbotron-fluid" style="margin-top:10vh;height:45%;width:75%;margin-left:25vw;">
 
     <div class="container">
           <h2 class="h1-reponsive mb-4 mt-2"><span style="color:#76b5c1;font-size:2em;margin-top:-2em;">2.</span></h2>
+
         <h2 class="lead" style="margin-top:-0.5em; font-size:160%;">Go through our classes at any time, where you will go through from the base level of how to greet someone in a language as the first phase, and then how to address the family members in the second level.</h2>
     </div>
 
 </div>
-<img src="media/chewa_img/steps.jpg" style="margin-top:-25%;width:50%;">
+<img src="media/chewa_img/steps.jpg" style="margin-top:-65vh;width:50%;mix-blend-mode:multiply;">
 <!--Jumbotron-->
 
 <!--Jumbotron left-->
 
 <!--Jumbotron-->
-<div class="jumbotron jumbotron-fluid" style="margin-top:10vh;height:40%;width:45%;">
+<div class="jumbotron jumbotron-fluid" style="margin-top:10%;height:45%;width:75%;">
 
     <div class="container">
-                <h2 class="h1-reponsive mb-4 mt-2"><span style="color:#76b5c1;font-size:2em;margin-top:-2em;">3.</span></h2>
-        <h2 class="lead" style="margin-top:-0.5em; font-size:160%;">You will be able to hear how each of the words you have heard in your lessons are pronounced in the consecutive page to each section. Luckily we have this option available for each language!</h2>
+                <h2 class="h1-reponsive mb-4 mt-2"><span style="color:#76b5c1;font-size:130%;margin-top:-2em;">3.</span></h2>
+
+        <h2 class="lead" style="margin-top:-0.5em; font-size:150%;">You will be able to hear how each of the words you have heard in your lessons are pronounced in the consecutive page to each section. Luckily we have this option available for each language!</h2>
     </div>
 
 </div>
-<img src="media/chewa_img/listening.png" style="margin-left:60%;margin-top:-25%;width:20%;">
+<img src="media/chewa_img/listening.png" style="margin-left:78%;margin-top:-55vh;width:20%;">
 <!--Jumbotron-->
 
 <!--Jumbotron right-->
-<div class="jumbotron jumbotron-fluid" style="margin-top:10vh;height:40%;width:50%;margin-left:50vw;">
+<div class="jumbotron jumbotron-fluid" style="margin-top:10vh;height:45%;width:70%;margin-left:30vw;">
 
     <div class="container">
         <h2 class="h1-reponsive mb-4 mt-2"><span style="color:#76b5c1;font-size:2em;margin-top:-1em;">4.</span></h2>
@@ -102,10 +96,9 @@ a {
     </div>
 
 </div>
-<img src="media/chewa_img/quiz.png" style="margin-left:20%;margin-top:-25%;width:20%;">
+<img src="media/chewa_img/quiz.png" style="margin-left:8%;margin-top:-45vh;width:20%;">
 
 <h2 style="margin-top:10vh;text-align:center;font-size:4em;color:#4d95a5;margin-bottom:10vh;">Let's get you started!</h2>
-<a href="{% url 'login'%}"><h4 style="font-size:3em;text-align:center;">CLICK ME</h4></a>
+<a href="{% url 'login'%}"><h4 style="font-size:3em;text-align:center;">click me</h4></a>
 <!--Jumbotron-->
-</div>
 {% endblock %}
